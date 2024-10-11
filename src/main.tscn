@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://i5wqqb7rnubc"]
+
+[ext_resource type="Script" path="res://src/player.gd" id="1_ji48a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_841ij"]
+size = Vector2(1000, 10)
+
+[node name="Main" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(500, 850)
+script = ExtResource("1_ji48a")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player"]
+polygon = PackedVector2Array(10, -17, -10, -17, -20, 0, -10, 17, 10, 17, 20, 0)
+
+[node name="Wall" type="Area2D" parent="."]
+position = Vector2(500, 5)
+
+[node name="ColorRect" type="ColorRect" parent="Wall"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -5.0
+offset_right = 500.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+shape = SubResource("RectangleShape2D_841ij")
+
+[node name="Wall2" type="Area2D" parent="."]
+position = Vector2(500, 995)
+
+[node name="ColorRect" type="ColorRect" parent="Wall2"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -5.0
+offset_right = 500.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
+shape = SubResource("RectangleShape2D_841ij")
