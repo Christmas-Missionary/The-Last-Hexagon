@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://i5wqqb7rnubc"]
+[gd_scene load_steps=5 format=3 uid="uid://i5wqqb7rnubc"]
 
 [ext_resource type="Script" path="res://src/player.gd" id="1_ji48a"]
-[ext_resource type="Shape2D" uid="uid://dp4vxi575ml5m" path="res://src/horizonal_wall_collision.tres" id="2_mfngk"]
-[ext_resource type="Shape2D" uid="uid://d3bnq5u8foyj5" path="res://src/vertical_wall_collision.tres" id="3_ab31u"]
+[ext_resource type="Script" path="res://src/player_gun.gd" id="2_d4w3d"]
+[ext_resource type="Shape2D" uid="uid://dp4vxi575ml5m" path="res://collision_shapes/horizonal_wall_collision.tres" id="2_mfngk"]
+[ext_resource type="Shape2D" uid="uid://d3bnq5u8foyj5" path="res://collision_shapes/vertical_wall_collision.tres" id="3_ab31u"]
 
 [node name="Main" type="Node2D"]
+metadata/_edit_lock_ = true
 
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(600, 700)
@@ -12,6 +14,24 @@ script = ExtResource("1_ji48a")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player"]
 polygon = PackedVector2Array(10, -17, -10, -17, -20, 0, -10, 17, 10, 17, 20, 0)
+metadata/_edit_lock_ = true
+
+[node name="PlayerGun" type="Sprite2D" parent="Player"]
+script = ExtResource("2_d4w3d")
+
+[node name="Placeholder" type="ColorRect" parent="Player/PlayerGun"]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -4.0
+offset_right = 29.0
+offset_bottom = 4.0
+grow_horizontal = 0
+grow_vertical = 2
+pivot_offset = Vector2(0, 4)
+mouse_filter = 2
 
 [node name="UpWall" type="Area2D" parent="."]
 position = Vector2(500, 5)
@@ -26,7 +46,6 @@ offset_right = 700.0
 offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UpWall"]
 position = Vector2(100, 0)
@@ -68,7 +87,6 @@ metadata/_edit_use_anchors_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
 position = Vector2(0, -100)
 shape = ExtResource("3_ab31u")
-metadata/_edit_lock_ = true
 
 [node name="LeftWall" type="Area2D" parent="."]
 position = Vector2(5, 400)
