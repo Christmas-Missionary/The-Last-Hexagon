@@ -3,10 +3,6 @@ class_name Player
 
 const _SPEED: float = 300.0
 
-## This may line break once we get into cyclic dependencies
-## Make Singleton "Scenes" once this happens
-const _BULLET_SCENE: PackedScene = preload("res://src/bullet.tscn")
-
 # ! WARNING DO NOT CHANGE THESE! WARNING !
 # 30.0 is wall offset, (1200, 800) is length of arena.
 const _UPLEFT_BOUND: Vector2 = Vector2.ONE * 30.0
@@ -38,6 +34,6 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"shoot") and num_of_bullets > 0:
 		energy -= 5
 		num_of_bullets -= 1
-		var bullet: = _BULLET_SCENE.instantiate() as Bullet
+		var bullet: = Preload.BULLET.instantiate() as Bullet
 		add_sibling(bullet, true)
 		bullet.spawn(position, Vector2.RIGHT.rotated(gun.rotation))
