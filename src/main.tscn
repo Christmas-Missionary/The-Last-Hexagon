@@ -139,11 +139,11 @@ script = ExtResource("6_rgcsu")
 [node name="TimeLabel" type="RichTextLabel" parent="UI"]
 layout_mode = 0
 offset_top = 840.0
-offset_right = 529.0
+offset_right = 644.0
 offset_bottom = 932.0
 theme_override_fonts/normal_font = ExtResource("8_5jn85")
 theme_override_font_sizes/normal_font_size = 96
-text = "H:MM:SS.T"
+text = "HHH:MM:SS.T"
 script = ExtResource("9_iccux")
 
 [node name="EnemyTimer" type="Timer" parent="."]
