@@ -6,7 +6,6 @@
 
 [node name="Bullet" type="Area2D"]
 process_mode = 1
-monitorable = false
 script = ExtResource("1_t36c6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
