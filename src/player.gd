@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 const _SPEED: float = 300.0
 const _BULLET_SCENE: PackedScene = preload("res://src/bullet.tscn")
@@ -8,18 +9,36 @@ const _BULLET_SCENE: PackedScene = preload("res://src/bullet.tscn")
 const _UPLEFT_BOUND: Vector2 = Vector2.ONE * 30.0
 const _DOWNRIGHT_BOUND: Vector2 = Vector2(1200, 800) - _UPLEFT_BOUND
 
+var energy: float = 1200.0:
+	set(val):
+		energy = val
+		energy_changed.emit(roundi(val))
+
+var num_of_bullets: int = 30
+
+signal energy_changed(new_val: int)
+
 @onready var gun: = $PlayerGun as Sprite2D
 
 func _physics_process(delta: float) -> void:
-	# unnormalized vector is fairer when EVERY key press is costly
-	position.x += Input.get_axis(&"left", &"right") * _SPEED * delta
-	position.y += Input.get_axis(&"up", &"down") * _SPEED * delta
-
+	# no cheating by going diagonal
+	position += Input.get_vector(&"left", &"right", &"up", &"down") * _SPEED * delta
+	
 	# stays in arena
 	position = position.clamp(_UPLEFT_BOUND, _DOWNRIGHT_BOUND)
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"shoot"):
+	if event is InputEventMouse:
+		energy -= 0.03125
+		print(energy)
+	
+	if event is InputEventKey:
+		energy -= 1
+		print(energy)
+	
+	if event.is_action_pressed(&"shoot") and num_of_bullets > 0:
+		energy -= 5
+		num_of_bullets -= 1
 		var bullet: = _BULLET_SCENE.instantiate() as Bullet
 		add_sibling(bullet, true)
 		bullet.spawn(position, Vector2.RIGHT.rotated(gun.rotation))
