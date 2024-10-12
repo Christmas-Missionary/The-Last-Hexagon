@@ -27,4 +27,4 @@ func _get_hit(area: Area2D) -> void:
 
 func _hit_player(body: CharacterBody2D) -> void:
 	if body is Player:
-		(body as Player).energy -= 100
+		(body as Player).energy -= 25

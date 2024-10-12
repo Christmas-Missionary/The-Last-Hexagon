@@ -26,5 +26,5 @@ func bounce(wall_name: StringName) -> void:
 
 func _hit_body(body: Node2D) -> void:
 	if body is Player:
-		(body as Player).energy -= 100
+		(body as Player).energy -= 25
 		queue_free()

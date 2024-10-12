@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://i5wqqb7rnubc"]
+[gd_scene load_steps=11 format=3 uid="uid://i5wqqb7rnubc"]
 
 [ext_resource type="Script" path="res://src/main.gd" id="1_fgkeu"]
 [ext_resource type="Script" path="res://src/player.gd" id="1_ji48a"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://src/energy_left_bar.gd" id="6_rgcsu"]
 [ext_resource type="FontFile" uid="uid://ctrrksojqtxhb" path="res://fonts/homevideo.ttf" id="8_5jn85"]
 [ext_resource type="Script" path="res://src/time_label.gd" id="9_iccux"]
+[ext_resource type="Script" path="res://src/bullet_bar.gd" id="10_bnoa4"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_fgkeu")
@@ -146,10 +147,22 @@ theme_override_font_sizes/normal_font_size = 96
 text = "HHH:MM:SS.T"
 script = ExtResource("9_iccux")
 
+[node name="BulletBar" type="ColorRect" parent="UI"]
+layout_direction = 3
+layout_mode = 0
+offset_left = -1600.0
+offset_top = 925.0
+offset_right = -1200.0
+offset_bottom = 975.0
+rotation = 3.14159
+color = Color(0, 0.690196, 1, 1)
+script = ExtResource("10_bnoa4")
+
 [node name="EnemyTimer" type="Timer" parent="."]
 process_callback = 0
 autostart = true
 
+[connection signal="bullet_shot" from="Player" to="UI/BulletBar" method="set_size_x"]
 [connection signal="energy_changed" from="Player" to="UI/EnergyBar/EnergyLeftBar" method="set_size_x"]
 [connection signal="area_entered" from="UpWall" to="UpWall" method="_figure_out_impact"]
 [connection signal="area_entered" from="DownWall" to="DownWall" method="_figure_out_impact"]
