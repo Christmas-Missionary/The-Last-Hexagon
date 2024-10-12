@@ -8,6 +8,10 @@ const _UPLEFT_BOUND: Vector2 = Vector2.ONE * 30.0
 const _DOWNRIGHT_BOUND: Vector2 = Vector2(1200, 800) - _UPLEFT_BOUND
 
 @onready var _player: = $/root/Main/Player as Node2D
+@onready var gun: = $Gun as Node2D
+
+func _spawn(pos: Vector2) -> void:
+	position = pos
 
 func _physics_process(delta: float) -> void:
 	var direction: Vector2 = (_player.position - global_position).normalized()
@@ -23,3 +27,8 @@ func _get_hit(area: Area2D) -> void:
 func _hit_player(body: CharacterBody2D) -> void:
 	if body is Player:
 		(body as Player).energy -= 100
+
+func _shoot() -> void:
+	var bullet: = Preload.BULLET.instantiate() as Bullet
+	add_sibling(bullet, true)
+	bullet.spawn(position, Vector2.RIGHT.rotated(gun.rotation))
