@@ -10,10 +10,8 @@ const _DOWNRIGHT_BOUND: Vector2 = Vector2(1200, 800) - _UPLEFT_BOUND
 @onready var _player: = $/root/Main/Player as Node2D
 
 func _physics_process(delta: float) -> void:
-	var direction: Vector2 = _player.position - global_position
-	var angle: float = transform.x.angle_to(direction) - QUART
-	rotate(signf(angle) * minf(delta * 3.0, absf(angle))) 
-	position += Vector2.RIGHT.rotated(rotation + QUART) * SPEED * delta
+	var direction: Vector2 = (_player.position - global_position).normalized()
+	position += direction * SPEED * delta
 	
 	position = position.clamp(_UPLEFT_BOUND, _DOWNRIGHT_BOUND)
 

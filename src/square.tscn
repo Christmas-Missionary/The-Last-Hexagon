@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://dokqdt2nycdlu"]
+
+[ext_resource type="Script" path="res://src/square.gd" id="1_2lpd2"]
+[ext_resource type="Script" path="res://src/square_gun.gd" id="2_eakt4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gatum"]
+size = Vector2(25, 25)
+
+[node name="Square" type="Area2D"]
+script = ExtResource("1_2lpd2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gatum")
+
+[node name="PlayerGun" type="Sprite2D" parent="."]
+script = ExtResource("2_eakt4")
+
+[node name="Placeholder" type="ColorRect" parent="PlayerGun"]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -5.0
+offset_right = 29.0
+offset_bottom = 4.0
+grow_horizontal = 0
+grow_vertical = 2
+pivot_offset = Vector2(0, 5)
+mouse_filter = 2
+color = Color(1, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[connection signal="area_entered" from="." to="." method="_get_hit"]
+[connection signal="body_entered" from="." to="." method="_hit_player"]

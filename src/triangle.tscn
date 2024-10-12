@@ -9,4 +9,4 @@ script = ExtResource("1_dk8q8")
 polygon = PackedVector2Array(0, 18, 17, -11, -17, -11)
 
 [connection signal="area_entered" from="." to="." method="_get_hit"]
-[connection signal="body_entered" from="." to="." method="_get_player"]
+[connection signal="body_entered" from="." to="." method="_hit_player"]
