@@ -9,11 +9,11 @@ process_mode = 1
 monitorable = false
 script = ExtResource("1_t36c6")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = ExtResource("3_gjuun")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 use_parent_material = true
-scale = Vector2(5, 5)
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("2_lipo8")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = ExtResource("3_gjuun")
