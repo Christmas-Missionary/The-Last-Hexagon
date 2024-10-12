@@ -2,6 +2,9 @@ extends CharacterBody2D
 class_name Player
 
 const _SPEED: float = 300.0
+
+## This may line break once we get into cyclic dependencies
+## Make Singleton "Scenes" once this happens
 const _BULLET_SCENE: PackedScene = preload("res://src/bullet.tscn")
 
 # ! WARNING DO NOT CHANGE THESE! WARNING !
@@ -30,12 +33,8 @@ func _physics_process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouse:
 		energy -= 0.03125
-		print(energy)
-	
 	if event is InputEventKey:
 		energy -= 1
-		print(energy)
-	
 	if event.is_action_pressed(&"shoot") and num_of_bullets > 0:
 		energy -= 5
 		num_of_bullets -= 1
