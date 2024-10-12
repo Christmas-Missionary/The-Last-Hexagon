@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dywd0nlh66iqb"]
+
+[ext_resource type="Script" path="res://src/triangle.gd" id="1_dk8q8"]
+
+[node name="Triangle" type="Area2D"]
+script = ExtResource("1_dk8q8")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, 18, 17, -11, -17, -11)
+
+[connection signal="area_entered" from="." to="." method="_get_hit"]
+[connection signal="body_entered" from="." to="." method="_get_player"]
