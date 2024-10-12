@@ -1,11 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://i5wqqb7rnubc"]
+[gd_scene load_steps=12 format=3 uid="uid://i5wqqb7rnubc"]
 
 [ext_resource type="Script" path="res://src/main.gd" id="1_fgkeu"]
 [ext_resource type="Script" path="res://src/player.gd" id="1_ji48a"]
-[ext_resource type="Script" path="res://src/player_gun.gd" id="2_d4w3d"]
 [ext_resource type="Shape2D" uid="uid://dp4vxi575ml5m" path="res://collision_shapes/horizonal_wall_collision.tres" id="2_mfngk"]
 [ext_resource type="Script" path="res://src/wall.gd" id="3_4rowq"]
 [ext_resource type="Shape2D" uid="uid://d3bnq5u8foyj5" path="res://collision_shapes/vertical_wall_collision.tres" id="3_ab31u"]
+[ext_resource type="Texture2D" uid="uid://dj7xms3m0a8fv" path="res://images/Player_Cannon.png" id="3_eji7f"]
+[ext_resource type="Texture2D" uid="uid://dayc3aifsc7ny" path="res://images/Hexagon.png" id="3_ygnfo"]
 [ext_resource type="Script" path="res://src/energy_left_bar.gd" id="6_rgcsu"]
 [ext_resource type="FontFile" uid="uid://ctrrksojqtxhb" path="res://fonts/homevideo.ttf" id="8_5jn85"]
 [ext_resource type="Script" path="res://src/time_label.gd" id="9_iccux"]
@@ -23,24 +24,13 @@ script = ExtResource("1_ji48a")
 polygon = PackedVector2Array(10, -17, -10, -17, -20, 0, -10, 17, 10, 17, 20, 0)
 metadata/_edit_lock_ = true
 
-[node name="PlayerGun" type="Sprite2D" parent="Player"]
-script = ExtResource("2_d4w3d")
+[node name="Hexagon" type="Sprite2D" parent="Player"]
+texture = ExtResource("3_ygnfo")
 
-[node name="Placeholder" type="ColorRect" parent="Player/PlayerGun"]
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -1.0
-offset_top = -5.0
-offset_right = 29.0
-offset_bottom = 4.0
-grow_horizontal = 0
-grow_vertical = 2
-pivot_offset = Vector2(0, 5)
-mouse_filter = 2
-color = Color(0, 1, 0, 1)
-metadata/_edit_use_anchors_ = true
+[node name="PlayerGun" type="Sprite2D" parent="Player"]
+position = Vector2(16, 0)
+scale = Vector2(30, 10)
+texture = ExtResource("3_eji7f")
 
 [node name="UpWall" type="Area2D" parent="."]
 position = Vector2(500, 5)

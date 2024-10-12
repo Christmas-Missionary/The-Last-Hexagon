@@ -16,6 +16,7 @@ func _spawn(pos: Vector2) -> void:
 func _physics_process(delta: float) -> void:
 	var direction: Vector2 = (_player.position - global_position).normalized()
 	position += direction * SPEED * delta
+	rotation = position.angle_to_point(_player.position)
 	
 	position = position.clamp(_UPLEFT_BOUND, _DOWNRIGHT_BOUND)
 
@@ -31,4 +32,4 @@ func _hit_player(body: CharacterBody2D) -> void:
 func _shoot() -> void:
 	var bullet: = Preload.BULLET.instantiate() as Bullet
 	add_sibling(bullet, true)
-	bullet.spawn(position, Vector2.RIGHT.rotated(gun.rotation))
+	bullet.spawn(position, Vector2.RIGHT.rotated(rotation))
