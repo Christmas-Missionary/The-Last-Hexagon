@@ -10,8 +10,6 @@ const _DOWNRIGHT_BOUND: Vector2 = Vector2(1200, 800) - _UPLEFT_BOUND
 
 @onready var gun: = $PlayerGun as Sprite2D
 
-signal has_shot(pos: Vector2)
-
 func _physics_process(delta: float) -> void:
 	# unnormalized vector is fairer when EVERY key press is costly
 	position.x += Input.get_axis(&"left", &"right") * _SPEED * delta
@@ -22,7 +20,6 @@ func _physics_process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"shoot"):
-		var bullet: Node = _BULLET_SCENE.instantiate()
+		var bullet: = _BULLET_SCENE.instantiate() as Bullet
 		add_sibling(bullet, true)
-		has_shot.connect(Callable(bullet, &"_spawn"), CONNECT_ONE_SHOT)
-		has_shot.emit(position, Vector2.RIGHT.rotated(gun.rotation))
+		bullet.spawn(position, Vector2.RIGHT.rotated(gun.rotation))
