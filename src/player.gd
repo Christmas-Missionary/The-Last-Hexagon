@@ -24,5 +24,5 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"shoot"):
 		var bullet: Node = _BULLET_SCENE.instantiate()
 		add_sibling(bullet, true)
-		has_shot.connect(Callable(bullet, &"spawn"), CONNECT_ONE_SHOT)
+		has_shot.connect(Callable(bullet, &"_spawn"), CONNECT_ONE_SHOT)
 		has_shot.emit(position, Vector2.RIGHT.rotated(gun.rotation))

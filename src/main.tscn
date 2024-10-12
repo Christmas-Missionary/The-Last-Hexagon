@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://i5wqqb7rnubc"]
+[gd_scene load_steps=6 format=3 uid="uid://i5wqqb7rnubc"]
 
 [ext_resource type="Script" path="res://src/player.gd" id="1_ji48a"]
 [ext_resource type="Script" path="res://src/player_gun.gd" id="2_d4w3d"]
 [ext_resource type="Shape2D" uid="uid://dp4vxi575ml5m" path="res://collision_shapes/horizonal_wall_collision.tres" id="2_mfngk"]
+[ext_resource type="Script" path="res://src/wall.gd" id="3_4rowq"]
 [ext_resource type="Shape2D" uid="uid://d3bnq5u8foyj5" path="res://collision_shapes/vertical_wall_collision.tres" id="3_ab31u"]
 
 [node name="Main" type="Node2D"]
@@ -35,6 +36,7 @@ mouse_filter = 2
 
 [node name="UpWall" type="Area2D" parent="."]
 position = Vector2(500, 5)
+script = ExtResource("3_4rowq")
 
 [node name="ColorRect" type="ColorRect" parent="UpWall"]
 anchors_preset = 15
@@ -53,6 +55,7 @@ shape = ExtResource("2_mfngk")
 
 [node name="DownWall" type="Area2D" parent="."]
 position = Vector2(600, 795)
+script = ExtResource("3_4rowq")
 
 [node name="ColorRect" type="ColorRect" parent="DownWall"]
 anchors_preset = 15
@@ -71,6 +74,7 @@ shape = ExtResource("2_mfngk")
 
 [node name="RightWall" type="Area2D" parent="."]
 position = Vector2(1195, 500)
+script = ExtResource("3_4rowq")
 
 [node name="ColorRect" type="ColorRect" parent="RightWall"]
 anchors_preset = 15
@@ -90,6 +94,7 @@ shape = ExtResource("3_ab31u")
 
 [node name="LeftWall" type="Area2D" parent="."]
 position = Vector2(5, 400)
+script = ExtResource("3_4rowq")
 
 [node name="ColorRect" type="ColorRect" parent="LeftWall"]
 anchors_preset = 15
@@ -105,3 +110,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
 shape = ExtResource("3_ab31u")
+
+[connection signal="area_entered" from="UpWall" to="UpWall" method="_figure_out_impact"]
+[connection signal="area_entered" from="DownWall" to="DownWall" method="_figure_out_impact"]
+[connection signal="area_entered" from="RightWall" to="RightWall" method="_figure_out_impact"]
+[connection signal="area_entered" from="LeftWall" to="LeftWall" method="_figure_out_impact"]
