@@ -6,7 +6,8 @@ const SPEED: float = 600.0
 var velocity: Vector2 = Vector2()
 
 # Player calls this
-func spawn(pos: Vector2, dir: Vector2):
+func spawn(pos: Vector2, dir: Vector2) -> void:
+	body_entered.connect(_hit_body)
 	velocity = dir * SPEED
 	pos += (velocity / 20)
 	position = pos
@@ -22,3 +23,8 @@ func bounce(wall_name: StringName) -> void:
 		&"RightWall": velocity.x = -velocity.x
 		&"LeftWall": velocity.x = -velocity.x
 		_: printerr("Object, " + wall_name + ", has wall.gd when it is not supposed to for bullet method, 'bounce'.")
+
+func _hit_body(body: Node2D) -> void:
+	if body is Player:
+		(body as Player).energy -= 100
+		queue_free()
