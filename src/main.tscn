@@ -1,17 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://i5wqqb7rnubc"]
+[gd_scene load_steps=10 format=3 uid="uid://i5wqqb7rnubc"]
 
+[ext_resource type="Script" path="res://src/main.gd" id="1_fgkeu"]
 [ext_resource type="Script" path="res://src/player.gd" id="1_ji48a"]
-[ext_resource type="PackedScene" uid="uid://dokqdt2nycdlu" path="res://src/square.tscn" id="1_pvw0l"]
 [ext_resource type="Script" path="res://src/player_gun.gd" id="2_d4w3d"]
 [ext_resource type="Shape2D" uid="uid://dp4vxi575ml5m" path="res://collision_shapes/horizonal_wall_collision.tres" id="2_mfngk"]
 [ext_resource type="Script" path="res://src/wall.gd" id="3_4rowq"]
 [ext_resource type="Shape2D" uid="uid://d3bnq5u8foyj5" path="res://collision_shapes/vertical_wall_collision.tres" id="3_ab31u"]
 [ext_resource type="Script" path="res://src/energy_left_bar.gd" id="6_rgcsu"]
+[ext_resource type="FontFile" uid="uid://ctrrksojqtxhb" path="res://fonts/homevideo.ttf" id="8_5jn85"]
+[ext_resource type="Script" path="res://src/time_label.gd" id="9_iccux"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_fgkeu")
 metadata/_edit_lock_ = true
-
-[node name="Square" parent="." instance=ExtResource("1_pvw0l")]
 
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(600, 700)
@@ -135,8 +136,23 @@ offset_bottom = 40.0
 color = Color(0, 1, 0, 1)
 script = ExtResource("6_rgcsu")
 
+[node name="TimeLabel" type="RichTextLabel" parent="UI"]
+layout_mode = 0
+offset_top = 840.0
+offset_right = 529.0
+offset_bottom = 932.0
+theme_override_fonts/normal_font = ExtResource("8_5jn85")
+theme_override_font_sizes/normal_font_size = 96
+text = "H:MM:SS.T"
+script = ExtResource("9_iccux")
+
+[node name="EnemyTimer" type="Timer" parent="."]
+process_callback = 0
+autostart = true
+
 [connection signal="energy_changed" from="Player" to="UI/EnergyBar/EnergyLeftBar" method="set_size_x"]
 [connection signal="area_entered" from="UpWall" to="UpWall" method="_figure_out_impact"]
 [connection signal="area_entered" from="DownWall" to="DownWall" method="_figure_out_impact"]
 [connection signal="area_entered" from="RightWall" to="RightWall" method="_figure_out_impact"]
 [connection signal="area_entered" from="LeftWall" to="LeftWall" method="_figure_out_impact"]
+[connection signal="timeout" from="EnemyTimer" to="." method="_spawn_enemy"]
