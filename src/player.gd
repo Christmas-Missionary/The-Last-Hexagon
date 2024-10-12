@@ -32,7 +32,8 @@ func _physics_process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouse:
-		energy -= 00.015625
+		energy -= 0.015625
+		rotation = position.angle_to_point(get_global_mouse_position())
 	if event is InputEventKey:
 		energy -= 0.125
 	if event.is_action_pressed(&"shoot") and num_of_bullets > 0:
@@ -40,4 +41,4 @@ func _input(event: InputEvent) -> void:
 		num_of_bullets -= 1
 		var bullet: = Preload.BULLET.instantiate() as Bullet
 		add_sibling(bullet, true)
-		bullet.spawn(position, Vector2.RIGHT.rotated(gun.rotation))
+		bullet.spawn(position, Vector2.RIGHT.rotated(rotation))
