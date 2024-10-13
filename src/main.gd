@@ -26,6 +26,7 @@ func _spawn_enemy() -> void:
 		Preload.TRIANGLE if time_played < 15.0 || randf() > 0.5 else
 		Preload.SQUARE).instantiate()
 	add_child(enemy, true)
+	move_child(enemy, 5)
 	enemy.add_to_group(ENEMY_GROUP_NAME)
 	enemy_spawned.connect(Callable(enemy, &"_spawn"), CONNECT_ONE_SHOT)
 	enemy_spawned.emit(pos)

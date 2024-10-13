@@ -1,5 +1,7 @@
 extends Area2D
 
+const TRIANGLE_DIES_SOUND: AudioStreamWAV = preload("res://audio/triangle_dies.wav")
+
 const QUART: float = TAU / 4
 const SPEED: float = 200.0
 
@@ -22,9 +24,12 @@ func _physics_process(delta: float) -> void:
 
 func _get_hit(area: Area2D) -> void:
 	if area is Bullet:
+		var death_sound: = Preload.ENEMY_DEATH_SOUND.instantiate() as EnemyDeathSound
+		add_sibling(death_sound, true)
+		death_sound.spawn(TRIANGLE_DIES_SOUND, position)
 		area.queue_free()
 		queue_free()
 
 func _hit_player(body: CharacterBody2D) -> void:
 	if body is Player:
-		(body as Player).energy -= 25
+		(body as Player).get_hit()

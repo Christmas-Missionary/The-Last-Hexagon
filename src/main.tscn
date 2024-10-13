@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://i5wqqb7rnubc"]
+[gd_scene load_steps=17 format=3 uid="uid://i5wqqb7rnubc"]
 
 [ext_resource type="Script" path="res://src/main.gd" id="1_fgkeu"]
 [ext_resource type="Script" path="res://src/player.gd" id="1_ji48a"]
@@ -7,6 +7,8 @@
 [ext_resource type="Shape2D" uid="uid://d3bnq5u8foyj5" path="res://collision_shapes/vertical_wall_collision.tres" id="3_ab31u"]
 [ext_resource type="Texture2D" uid="uid://dj7xms3m0a8fv" path="res://images/Player_Cannon.png" id="3_eji7f"]
 [ext_resource type="Texture2D" uid="uid://dayc3aifsc7ny" path="res://images/Hexagon.png" id="3_ygnfo"]
+[ext_resource type="AudioStream" uid="uid://be06h8r1yh42i" path="res://audio/hexagon_getting_hit.wav" id="5_0o6jl"]
+[ext_resource type="AudioStream" uid="uid://8m01hm2j4cgm" path="res://audio/hexagon_shooting.wav" id="6_8xfvc"]
 [ext_resource type="Script" path="res://src/energy_left_bar.gd" id="6_rgcsu"]
 [ext_resource type="FontFile" uid="uid://ctrrksojqtxhb" path="res://fonts/homevideo.ttf" id="8_5jn85"]
 [ext_resource type="Script" path="res://src/time_label.gd" id="9_iccux"]
@@ -41,6 +43,12 @@ position = Vector2(16, 0)
 scale = Vector2(30, 10)
 texture = ExtResource("3_eji7f")
 metadata/_edit_lock_ = true
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("5_0o6jl")
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("6_8xfvc")
 
 [node name="UpWall" type="Area2D" parent="."]
 position = Vector2(500, 5)

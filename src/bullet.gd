@@ -5,6 +5,8 @@ const SPEED: float = 600.0
 
 var velocity: Vector2 = Vector2()
 
+@onready var _bounce_sound: = $BounceSound as AudioStreamPlayer2D
+
 # Player calls this
 func spawn(pos: Vector2, dir: Vector2) -> void:
 	add_to_group(Main.BULLET_GROUP_NAME)
@@ -24,8 +26,10 @@ func bounce(wall_name: StringName) -> void:
 		&"RightWall": velocity.x = -velocity.x
 		&"LeftWall": velocity.x = -velocity.x
 		_: printerr("Object, " + wall_name + ", has wall.gd when it is not supposed to for bullet method, 'bounce'.")
+	if Main.is_playing:
+		_bounce_sound.play()
 
 func _hit_body(body: Node2D) -> void:
 	if body is Player:
-		(body as Player).energy -= 25
+		(body as Player).get_hit()
 		queue_free()
