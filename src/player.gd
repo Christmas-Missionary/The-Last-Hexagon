@@ -11,8 +11,6 @@ const _DOWNRIGHT_BOUND: Vector2 = Vector2(1200, 800) - _UPLEFT_BOUND
 const _STARTING_ENERGY: float = 1200.0
 const _STARTING_BULLETS: int = 240
 
-@onready var coll: = $CollisionPolygon2D as CollisionPolygon2D
-
 var energy: float = _STARTING_ENERGY:
 	set(val):
 		energy = val
@@ -29,7 +27,9 @@ signal energy_changed(new_val: int)
 signal no_energy_left
 signal bullet_shot(new_val: int)
 
-@onready var gun: = $PlayerGun as Sprite2D
+@onready var _coll: = $CollisionPolygon2D as CollisionPolygon2D
+@onready var _hit_sound: = $HitSound as AudioStreamPlayer2D
+@onready var _shoot_sound: = $ShootSound as AudioStreamPlayer2D
 
 func _ready() -> void:
 	_stop()
@@ -56,9 +56,10 @@ func _input(event: InputEvent) -> void:
 		var bullet: = BULLET.instantiate() as Bullet
 		add_sibling(bullet, true)
 		bullet.spawn(position, Vector2.RIGHT.rotated(rotation))
+		_shoot_sound.play()
 
 func _start() -> void:
-	coll.set_deferred(&"disabled", false)
+	_coll.set_deferred(&"disabled", false)
 	position = Vector2(600, 700)
 	energy = _STARTING_ENERGY
 	num_of_bullets = _STARTING_BULLETS
@@ -67,7 +68,12 @@ func _start() -> void:
 	show()
 
 func _stop() -> void:
-	coll.set_deferred(&"disabled", true)
+	_coll.set_deferred(&"disabled", true)
 	set_physics_process(false)
 	set_process_input(false)
 	hide()
+
+# Called by bullet, triangle, and square
+func get_hit() -> void:
+	energy -= 25
+	_hit_sound.play()
