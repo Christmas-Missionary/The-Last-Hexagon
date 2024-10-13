@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://i5wqqb7rnubc"]
+[gd_scene load_steps=21 format=3 uid="uid://i5wqqb7rnubc"]
 
 [ext_resource type="Script" path="res://src/main.gd" id="1_fgkeu"]
 [ext_resource type="Script" path="res://src/player.gd" id="1_ji48a"]
@@ -13,9 +13,21 @@
 [ext_resource type="FontFile" uid="uid://ctrrksojqtxhb" path="res://fonts/homevideo.ttf" id="8_5jn85"]
 [ext_resource type="Script" path="res://src/time_label.gd" id="9_iccux"]
 [ext_resource type="Script" path="res://src/bullet_bar.gd" id="10_bnoa4"]
+[ext_resource type="Script" path="res://src/energy_used.gd" id="11_6b4v8"]
 [ext_resource type="Script" path="res://src/legal_button.gd" id="12_bh3rl"]
 [ext_resource type="FontFile" uid="uid://cs7o1i14fu151" path="res://fonts/Unitblock-JpJma.ttf" id="13_g5git"]
 [ext_resource type="Script" path="res://src/legal_text.gd" id="14_bupsn"]
+[ext_resource type="AudioStream" uid="uid://tonu3ajmf11c" path="res://audio/button_press.wav" id="15_j64fg"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ifwmj"]
+random_pitch = 1.5
+streams_count = 1
+stream_0/stream = ExtResource("6_8xfvc")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_22tb3"]
+random_pitch = 2.0
+streams_count = 1
+stream_0/stream = ExtResource("15_j64fg")
 
 [node name="Main" type="Node2D"]
 process_mode = 1
@@ -48,7 +60,7 @@ metadata/_edit_lock_ = true
 stream = ExtResource("5_0o6jl")
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="Player"]
-stream = ExtResource("6_8xfvc")
+stream = SubResource("AudioStreamRandomizer_ifwmj")
 
 [node name="UpWall" type="Area2D" parent="."]
 position = Vector2(500, 5)
@@ -144,6 +156,16 @@ layout_mode = 3
 anchors_preset = 0
 metadata/_edit_lock_ = true
 
+[node name="EnergyUsed" type="RichTextLabel" parent="UI"]
+offset_left = 30.0
+offset_top = 719.0
+offset_right = 924.0
+offset_bottom = 789.0
+theme_override_fonts/normal_font = ExtResource("8_5jn85")
+theme_override_font_sizes/normal_font_size = 48
+text = "Energy used in menu: 0"
+script = ExtResource("11_6b4v8")
+
 [node name="EnergyBar" type="ColorRect" parent="UI"]
 layout_mode = 0
 offset_top = 800.0
@@ -201,6 +223,9 @@ offset_top = 300.0
 offset_right = 990.0
 offset_bottom = 550.0
 metadata/_edit_lock_ = true
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/VBoxContainer"]
+stream = SubResource("AudioStreamRandomizer_22tb3")
 
 [node name="PlayButton" type="Button" parent="UI/VBoxContainer"]
 layout_mode = 2
@@ -263,16 +288,21 @@ process_callback = 0
 [connection signal="no_energy_left" from="Player" to="UI/Title" method="show"]
 [connection signal="no_energy_left" from="Player" to="UI/VBoxContainer" method="show"]
 [connection signal="no_energy_left" from="Player" to="EnemyTimer" method="stop"]
+[connection signal="no_energy_left" from="Player" to="UI/EnergyUsed" method="_turn_on"]
 [connection signal="area_entered" from="UpWall" to="UpWall" method="_figure_out_impact"]
 [connection signal="area_entered" from="DownWall" to="DownWall" method="_figure_out_impact"]
 [connection signal="area_entered" from="RightWall" to="RightWall" method="_figure_out_impact"]
 [connection signal="area_entered" from="LeftWall" to="LeftWall" method="_figure_out_impact"]
+[connection signal="mouse_entered" from="UI/VBoxContainer/PlayButton" to="UI/VBoxContainer/HoverSound" method="play"]
 [connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="." method="_start_game"]
 [connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="Player" method="_start"]
 [connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="UI/TimeLabel" method="show"]
 [connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="UI/Title" method="hide"]
 [connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="UI/VBoxContainer" method="hide"]
 [connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="EnemyTimer" method="start"]
+[connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="UI/EnergyUsed" method="_turn_off"]
+[connection signal="mouse_entered" from="UI/VBoxContainer/LegalButton" to="UI/VBoxContainer/HoverSound" method="play"]
 [connection signal="pressed" from="UI/VBoxContainer/LegalButton" to="UI/VBoxContainer/LegalButton" method="_show"]
+[connection signal="mouse_entered" from="UI/VBoxContainer/LegalButton/CloseButton" to="UI/VBoxContainer/HoverSound" method="play"]
 [connection signal="pressed" from="UI/VBoxContainer/LegalButton/CloseButton" to="UI/VBoxContainer/LegalButton" method="_close"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_spawn_enemy"]
