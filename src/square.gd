@@ -30,6 +30,6 @@ func _hit_player(body: CharacterBody2D) -> void:
 		(body as Player).energy -= 25
 
 func _shoot() -> void:
-	var bullet: = Preload.BULLET.instantiate() as Bullet
+	var bullet: = Player.BULLET.instantiate() as Bullet
 	add_sibling(bullet, true)
 	bullet.spawn(position, Vector2.RIGHT.rotated(rotation))
