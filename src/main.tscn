@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://i5wqqb7rnubc"]
+[gd_scene load_steps=15 format=3 uid="uid://i5wqqb7rnubc"]
 
 [ext_resource type="Script" path="res://src/main.gd" id="1_fgkeu"]
 [ext_resource type="Script" path="res://src/player.gd" id="1_ji48a"]
@@ -12,6 +12,8 @@
 [ext_resource type="Script" path="res://src/time_label.gd" id="9_iccux"]
 [ext_resource type="Script" path="res://src/bullet_bar.gd" id="10_bnoa4"]
 [ext_resource type="Script" path="res://src/legal_button.gd" id="12_bh3rl"]
+[ext_resource type="FontFile" uid="uid://cs7o1i14fu151" path="res://fonts/Unitblock-JpJma.ttf" id="13_g5git"]
+[ext_resource type="Script" path="res://src/legal_text.gd" id="14_bupsn"]
 
 [node name="Main" type="Node2D"]
 process_mode = 1
@@ -190,6 +192,7 @@ offset_left = 190.0
 offset_top = 300.0
 offset_right = 990.0
 offset_bottom = 550.0
+metadata/_edit_lock_ = true
 
 [node name="PlayButton" type="Button" parent="UI/VBoxContainer"]
 layout_mode = 2
@@ -216,19 +219,19 @@ offset_top = -289.0
 offset_right = 597.0
 offset_bottom = 489.0
 color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
 
 [node name="LegalText" type="RichTextLabel" parent="UI/VBoxContainer/LegalButton"]
 visible = false
 layout_mode = 0
-offset_left = -581.0
+offset_left = -579.0
 offset_top = -289.0
 offset_right = 597.0
 offset_bottom = 489.0
-text = "Testhjkdhjkfhkjshfjkshfjks
-
-
-fsdfdsfdsfdsfdsfdsfdsf
-fdsfdsfdsfsdfsdfsdfdsfs"
+theme_override_fonts/normal_font = ExtResource("13_g5git")
+theme_override_font_sizes/normal_font_size = 36
+text = "Test"
+script = ExtResource("14_bupsn")
 
 [node name="CloseButton" type="Button" parent="UI/VBoxContainer/LegalButton"]
 visible = false
@@ -240,6 +243,7 @@ offset_bottom = 648.0
 theme_override_fonts/font = ExtResource("8_5jn85")
 theme_override_font_sizes/font_size = 96
 text = "Close"
+metadata/_edit_lock_ = true
 
 [node name="EnemyTimer" type="Timer" parent="."]
 process_callback = 0
