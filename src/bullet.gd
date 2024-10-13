@@ -7,6 +7,7 @@ var velocity: Vector2 = Vector2()
 
 # Player calls this
 func spawn(pos: Vector2, dir: Vector2) -> void:
+	add_to_group(Main.BULLET_GROUP_NAME)
 	body_entered.connect(_hit_body)
 	velocity = dir * SPEED
 	pos += (velocity / 20)

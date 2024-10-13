@@ -6,6 +6,9 @@ const _all_three: String = "H:MM:SS.T"
 
 @onready var main: = $"/root/Main" as Main
 
+func _ready() -> void:
+	text = ".0"
+
 func _physics_process(_delta) -> void:
 	if Main.is_playing:
 		var tenths_of_seconds: String = str(roundi(main.time_played * 10))

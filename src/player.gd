@@ -8,20 +8,31 @@ const _SPEED: float = 300.0
 const _UPLEFT_BOUND: Vector2 = Vector2.ONE * 30.0
 const _DOWNRIGHT_BOUND: Vector2 = Vector2(1200, 800) - _UPLEFT_BOUND
 
-var energy: float = 1200.0:
-	set(val):
-		energy = clampf(val, 0.0, 1200.0)
-		energy_changed.emit(roundi(val))
+const _STARTING_ENERGY: float = 1200.0
+const _STARTING_BULLETS: int = 240
 
-var num_of_bullets: int = 80:
+@onready var coll: = $CollisionPolygon2D as CollisionPolygon2D
+
+var energy: float = _STARTING_ENERGY:
+	set(val):
+		energy = val
+		energy_changed.emit(roundi(val))
+		if energy <= 0.0:
+			no_energy_left.emit()
+
+var num_of_bullets: int = _STARTING_BULLETS:
 	set(val):
 		num_of_bullets = val
 		bullet_shot.emit(val)
 
 signal energy_changed(new_val: int)
+signal no_energy_left
 signal bullet_shot(new_val: int)
 
 @onready var gun: = $PlayerGun as Sprite2D
+
+func _ready() -> void:
+	_stop()
 
 func _physics_process(delta: float) -> void:
 	# no cheating by going diagonal
@@ -29,6 +40,9 @@ func _physics_process(delta: float) -> void:
 	
 	# stays in arena
 	position = position.clamp(_UPLEFT_BOUND, _DOWNRIGHT_BOUND)
+
+## This does not load in Preload, keep it here for now.
+const BULLET: PackedScene = preload("res://src/bullet.tscn")
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouse:
@@ -39,6 +53,21 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"shoot") and num_of_bullets > 0:
 		energy -= 0.75
 		num_of_bullets -= 1
-		var bullet: = Preload.BULLET.instantiate() as Bullet
+		var bullet: = BULLET.instantiate() as Bullet
 		add_sibling(bullet, true)
 		bullet.spawn(position, Vector2.RIGHT.rotated(rotation))
+
+func _start() -> void:
+	coll.set_deferred(&"disabled", false)
+	position = Vector2(600, 700)
+	energy = _STARTING_ENERGY
+	num_of_bullets = _STARTING_BULLETS
+	set_physics_process(true)
+	set_process_input(true)
+	show()
+
+func _stop() -> void:
+	coll.set_deferred(&"disabled", true)
+	set_physics_process(false)
+	set_process_input(false)
+	hide()

@@ -13,12 +13,17 @@
 [ext_resource type="Script" path="res://src/bullet_bar.gd" id="10_bnoa4"]
 
 [node name="Main" type="Node2D"]
+process_mode = 1
 script = ExtResource("1_fgkeu")
 metadata/_edit_lock_ = true
 
 [node name="Player" type="CharacterBody2D" parent="."]
+process_mode = 1
+visible = false
 position = Vector2(600, 700)
+rotation = -1.5708
 script = ExtResource("1_ji48a")
+metadata/_edit_lock_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player"]
 polygon = PackedVector2Array(10, -17, -10, -17, -20, 0, -10, 17, 10, 17, 20, 0)
@@ -26,15 +31,18 @@ metadata/_edit_lock_ = true
 
 [node name="Hexagon" type="Sprite2D" parent="Player"]
 texture = ExtResource("3_ygnfo")
+metadata/_edit_lock_ = true
 
 [node name="PlayerGun" type="Sprite2D" parent="Player"]
 position = Vector2(16, 0)
 scale = Vector2(30, 10)
 texture = ExtResource("3_eji7f")
+metadata/_edit_lock_ = true
 
 [node name="UpWall" type="Area2D" parent="."]
 position = Vector2(500, 5)
 script = ExtResource("3_4rowq")
+metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="UpWall"]
 anchors_preset = 15
@@ -46,14 +54,17 @@ offset_right = 700.0
 offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UpWall"]
 position = Vector2(100, 0)
 shape = ExtResource("2_mfngk")
+metadata/_edit_lock_ = true
 
 [node name="DownWall" type="Area2D" parent="."]
 position = Vector2(600, 795)
 script = ExtResource("3_4rowq")
+metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="DownWall"]
 anchors_preset = 15
@@ -66,13 +77,16 @@ offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DownWall"]
 shape = ExtResource("2_mfngk")
+metadata/_edit_lock_ = true
 
 [node name="RightWall" type="Area2D" parent="."]
 position = Vector2(1195, 500)
 script = ExtResource("3_4rowq")
+metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="RightWall"]
 anchors_preset = 15
@@ -85,14 +99,17 @@ offset_bottom = 300.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
 position = Vector2(0, -100)
 shape = ExtResource("3_ab31u")
+metadata/_edit_lock_ = true
 
 [node name="LeftWall" type="Area2D" parent="."]
 position = Vector2(5, 400)
 script = ExtResource("3_4rowq")
+metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="LeftWall"]
 anchors_preset = 15
@@ -105,13 +122,16 @@ offset_bottom = 400.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
 shape = ExtResource("3_ab31u")
+metadata/_edit_lock_ = true
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
+metadata/_edit_lock_ = true
 
 [node name="EnergyBar" type="ColorRect" parent="UI"]
 layout_mode = 0
@@ -119,6 +139,7 @@ offset_top = 800.0
 offset_right = 1200.0
 offset_bottom = 840.0
 color = Color(1, 0, 0, 1)
+metadata/_edit_lock_ = true
 
 [node name="EnergyLeftBar" type="ColorRect" parent="UI/EnergyBar"]
 layout_mode = 0
@@ -126,8 +147,10 @@ offset_right = 1200.0
 offset_bottom = 40.0
 color = Color(0, 1, 0, 1)
 script = ExtResource("6_rgcsu")
+metadata/_edit_lock_ = true
 
 [node name="TimeLabel" type="RichTextLabel" parent="UI"]
+visible = false
 layout_mode = 0
 offset_top = 840.0
 offset_right = 644.0
@@ -140,7 +163,7 @@ script = ExtResource("9_iccux")
 [node name="BulletBar" type="ColorRect" parent="UI"]
 layout_direction = 3
 layout_mode = 0
-offset_left = -1600.0
+offset_left = -1680.0
 offset_top = 925.0
 offset_right = -1200.0
 offset_bottom = 975.0
@@ -148,14 +171,59 @@ rotation = 3.14159
 color = Color(0, 0.690196, 1, 1)
 script = ExtResource("10_bnoa4")
 
+[node name="Title" type="RichTextLabel" parent="UI"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 96.0
+offset_right = 1190.0
+offset_bottom = 210.0
+theme_override_fonts/normal_font = ExtResource("8_5jn85")
+theme_override_font_sizes/normal_font_size = 96
+bbcode_enabled = true
+text = "[center][color=#00b0ff]The Last Hexagon"
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="HBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 300.0
+offset_right = 990.0
+offset_bottom = 550.0
+
+[node name="PlayButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("8_5jn85")
+theme_override_font_sizes/font_size = 96
+text = "Play"
+metadata/_edit_lock_ = true
+
+[node name="LegalButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("8_5jn85")
+theme_override_font_sizes/font_size = 96
+text = "Legal"
+metadata/_edit_lock_ = true
+
 [node name="EnemyTimer" type="Timer" parent="."]
 process_callback = 0
-autostart = true
 
 [connection signal="bullet_shot" from="Player" to="UI/BulletBar" method="set_size_x"]
 [connection signal="energy_changed" from="Player" to="UI/EnergyBar/EnergyLeftBar" method="set_size_x"]
+[connection signal="no_energy_left" from="Player" to="." method="_end_game"]
+[connection signal="no_energy_left" from="Player" to="Player" method="_stop"]
+[connection signal="no_energy_left" from="Player" to="UI/Title" method="show"]
+[connection signal="no_energy_left" from="Player" to="UI/VBoxContainer" method="show"]
+[connection signal="no_energy_left" from="Player" to="EnemyTimer" method="stop"]
 [connection signal="area_entered" from="UpWall" to="UpWall" method="_figure_out_impact"]
 [connection signal="area_entered" from="DownWall" to="DownWall" method="_figure_out_impact"]
 [connection signal="area_entered" from="RightWall" to="RightWall" method="_figure_out_impact"]
 [connection signal="area_entered" from="LeftWall" to="LeftWall" method="_figure_out_impact"]
+[connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="." method="_start_game"]
+[connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="Player" method="_start"]
+[connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="UI/TimeLabel" method="show"]
+[connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="UI/Title" method="hide"]
+[connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="UI/VBoxContainer" method="hide"]
+[connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="EnemyTimer" method="start"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_spawn_enemy"]
