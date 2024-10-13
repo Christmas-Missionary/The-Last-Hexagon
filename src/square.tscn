@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dokqdt2nycdlu"]
+[gd_scene load_steps=7 format=3 uid="uid://dokqdt2nycdlu"]
 
 [ext_resource type="Script" path="res://src/square.gd" id="1_2lpd2"]
 [ext_resource type="Texture2D" uid="uid://cf7ippl6su4wr" path="res://images/Red_Square.png" id="2_d2m82"]
@@ -7,6 +7,11 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gatum"]
 size = Vector2(25, 25)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0lf8a"]
+random_pitch = 1.5
+streams_count = 1
+stream_0/stream = ExtResource("4_3mbnb")
 
 [node name="Square" type="Area2D"]
 script = ExtResource("1_2lpd2")
@@ -29,7 +34,7 @@ wait_time = 2.0
 autostart = true
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_3mbnb")
+stream = SubResource("AudioStreamRandomizer_0lf8a")
 
 [connection signal="area_entered" from="." to="." method="_get_hit"]
 [connection signal="body_entered" from="." to="." method="_hit_player"]
