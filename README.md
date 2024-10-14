@@ -31,5 +31,5 @@ https://www.fontspace.com/home-video-font-f116641
 
 # It doesn't work.
 1. If you are on safari, check to see if Lockdown mode is off.
-2. If you are on firefox, see if WebGL is on.
+2. If you are on firefox, see if WebGL is on.  
 Otherwise, comment the error on itch.io.
