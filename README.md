@@ -1,10 +1,10 @@
 # What is this?
 
-This is a game I made in 72 hours for Mini Jam 169.
-It is also the first game I made for itch.io.  
-https://christmas-missionary.itch.io/the-last-hexagon-jam-edition
-The Unlicense applies to all source code except for the fonts and sound effects.
-However, those are under the public domain, too.
+This is a game I made in 72 hours for Mini Jam 169.  
+It is also the first game I made for itch.io.    
+https://christmas-missionary.itch.io/the-last-hexagon-jam-edition  
+The Unlicense applies to all source code except for the fonts and sound effects.  
+However, those are under the public domain, too.  
 
 # How to run 
 1. Download the .zip file
@@ -17,14 +17,14 @@ However, those are under the public domain, too.
 
 # What's with the "other_copyrights"?
 
-GODOT_ENGINE.txt and GODOT_3RD_PARTY.txt are there to fulfill any licenses they come with.
-These are not important to the source code itself.
+`GODOT_ENGINE.txt` and `GODOT_3RD_PARTY.txt` are there to fulfill any licenses they come with.  
+These are not important to the source code itself.  
 
 # What about those 2 fonts?
-Both of those are in the public domain, made by GGBotNet.
-Here are the sources:
-https://www.fontspace.com/unitblock-font-f104834
-https://www.fontspace.com/home-video-font-f116641
+Both of those are in the public domain, made by GGBotNet.  
+Here are the sources:  
+https://www.fontspace.com/unitblock-font-f104834  
+https://www.fontspace.com/home-video-font-f116641  
 
 # It doesn't work.
 1. If you are on safari, check to see if Lockdown mode is off.
