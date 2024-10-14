@@ -13,6 +13,9 @@ static var is_playing: bool = false
 
 signal enemy_spawned(pos: Vector2)
 
+func _ready() -> void:
+	print("Hello! You exist!")
+
 func _physics_process(delta: float) -> void:
 	if is_playing:
 		time_played += delta
