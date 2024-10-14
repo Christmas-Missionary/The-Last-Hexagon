@@ -13,6 +13,7 @@ func _input(event: InputEvent) -> void:
 	text = "Energy used in menu: " + str(_energy_used).substr(0, 9)
 
 func _turn_off() -> void:
+	text = "Energy used in menu: 0"
 	set_process_input(false)
 	hide()
 	_energy_used = 0
