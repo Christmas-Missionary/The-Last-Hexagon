@@ -10,7 +10,7 @@ const _UPLEFT_BOUND: Vector2 = Vector2.ONE * 30.0
 const _DOWNRIGHT_BOUND: Vector2 = Vector2(1200, 800) - _UPLEFT_BOUND
 
 @onready var _player: = $/root/Main/Player as Node2D
-@onready var _shoot_sound: = $ShootSound as AudioStreamPlayer2D
+@onready var _shoot_comp: = $ShootComp as ShootComp
 
 func _spawn(pos: Vector2) -> void:
 	position = pos
@@ -35,8 +35,6 @@ func _hit_player(body: CharacterBody2D) -> void:
 	if body is Player:
 		(body as Player).get_hit()
 
-func _shoot() -> void:
-	var bullet: = Player.BULLET.instantiate() as Bullet
-	add_sibling(bullet, true)
-	bullet.spawn(position, Vector2.RIGHT.rotated(rotation))
-	_shoot_sound.play()
+
+func _notify_shoot_comp() -> void:
+	_shoot_comp.shoot(transform)

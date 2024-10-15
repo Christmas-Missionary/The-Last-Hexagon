@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqb4r1mx3n6q1"]
+
+[ext_resource type="Script" path="res://src/shoot_comp.gd" id="1_rno27"]
+
+[node name="ShootComp" type="AudioStreamPlayer2D"]
+script = ExtResource("1_rno27")

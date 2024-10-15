@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://e3kg3ypscypg"]
+[gd_scene load_steps=8 format=3 uid="uid://e3kg3ypscypg"]
 
 [ext_resource type="Script" path="res://src/player.gd" id="1_ypmm8"]
 [ext_resource type="Texture2D" uid="uid://dayc3aifsc7ny" path="res://images/Hexagon.png" id="2_3ora4"]
+[ext_resource type="PackedScene" uid="uid://dqb4r1mx3n6q1" path="res://src/ShootComp.tscn" id="2_omlpo"]
 [ext_resource type="Texture2D" uid="uid://dj7xms3m0a8fv" path="res://images/Player_Cannon.png" id="3_faytl"]
 [ext_resource type="AudioStream" uid="uid://be06h8r1yh42i" path="res://audio/hexagon_getting_hit.wav" id="4_j2yfm"]
 [ext_resource type="AudioStream" uid="uid://8m01hm2j4cgm" path="res://audio/hexagon_shooting.wav" id="5_8r5gn"]
@@ -19,6 +20,9 @@ rotation = -1.5708
 script = ExtResource("1_ypmm8")
 metadata/_edit_lock_ = true
 
+[node name="ShootComp" parent="." instance=ExtResource("2_omlpo")]
+stream = SubResource("AudioStreamRandomizer_ifwmj")
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(10, -17, -10, -17, -20, 0, -10, 17, 10, 17, 20, 0)
 metadata/_edit_lock_ = true
@@ -35,8 +39,5 @@ metadata/_edit_lock_ = true
 
 [node name="HitSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_j2yfm")
-
-[node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource("AudioStreamRandomizer_ifwmj")
 
 [connection signal="no_energy_left" from="." to="." method="_stop"]

@@ -29,7 +29,7 @@ signal bullet_shot(new_val: int)
 
 @onready var _coll: = $CollisionPolygon2D as CollisionPolygon2D
 @onready var _hit_sound: = $HitSound as AudioStreamPlayer2D
-@onready var _shoot_sound: = $ShootSound as AudioStreamPlayer2D
+@onready var _shoot_comp: = $ShootComp as ShootComp
 
 func _ready() -> void:
 	_stop()
@@ -41,9 +41,6 @@ func _physics_process(delta: float) -> void:
 	# stays in arena
 	position = position.clamp(_UPLEFT_BOUND, _DOWNRIGHT_BOUND)
 
-## This does not load in Preload, keep it here for now.
-const BULLET: PackedScene = preload("res://src/bullet.tscn")
-
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouse:
 		energy -= 0.015625
@@ -53,10 +50,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"shoot") and num_of_bullets > 0:
 		energy -= 0.75
 		num_of_bullets -= 1
-		var bullet: = BULLET.instantiate() as Bullet
-		add_sibling(bullet, true)
-		bullet.spawn(position, Vector2.RIGHT.rotated(rotation))
-		_shoot_sound.play()
+		_shoot_comp.shoot(transform)
 
 func _start() -> void:
 	_coll.set_deferred(&"disabled", false)
