@@ -157,6 +157,7 @@ anchors_preset = 0
 metadata/_edit_lock_ = true
 
 [node name="EnergyUsed" type="RichTextLabel" parent="UI"]
+layout_mode = 0
 offset_left = 30.0
 offset_top = 719.0
 offset_right = 924.0
@@ -285,10 +286,10 @@ process_callback = 0
 [connection signal="energy_changed" from="Player" to="UI/EnergyBar/EnergyLeftBar" method="set_size_x"]
 [connection signal="no_energy_left" from="Player" to="." method="_end_game"]
 [connection signal="no_energy_left" from="Player" to="Player" method="_stop"]
+[connection signal="no_energy_left" from="Player" to="UI/EnergyUsed" method="_turn_on"]
 [connection signal="no_energy_left" from="Player" to="UI/Title" method="show"]
 [connection signal="no_energy_left" from="Player" to="UI/VBoxContainer" method="show"]
 [connection signal="no_energy_left" from="Player" to="EnemyTimer" method="stop"]
-[connection signal="no_energy_left" from="Player" to="UI/EnergyUsed" method="_turn_on"]
 [connection signal="area_entered" from="UpWall" to="UpWall" method="_figure_out_impact"]
 [connection signal="area_entered" from="DownWall" to="DownWall" method="_figure_out_impact"]
 [connection signal="area_entered" from="RightWall" to="RightWall" method="_figure_out_impact"]
@@ -296,11 +297,11 @@ process_callback = 0
 [connection signal="mouse_entered" from="UI/VBoxContainer/PlayButton" to="UI/VBoxContainer/HoverSound" method="play"]
 [connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="." method="_start_game"]
 [connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="Player" method="_start"]
+[connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="UI/EnergyUsed" method="_turn_off"]
 [connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="UI/TimeLabel" method="show"]
 [connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="UI/Title" method="hide"]
 [connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="UI/VBoxContainer" method="hide"]
 [connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="EnemyTimer" method="start"]
-[connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="UI/EnergyUsed" method="_turn_off"]
 [connection signal="mouse_entered" from="UI/VBoxContainer/LegalButton" to="UI/VBoxContainer/HoverSound" method="play"]
 [connection signal="pressed" from="UI/VBoxContainer/LegalButton" to="UI/VBoxContainer/LegalButton" method="_show"]
 [connection signal="mouse_entered" from="UI/VBoxContainer/LegalButton/CloseButton" to="UI/VBoxContainer/HoverSound" method="play"]
