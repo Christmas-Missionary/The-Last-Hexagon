@@ -21,13 +21,15 @@ func _physics_process(delta: float) -> void:
 		time_played += delta
 
 func _spawn_enemy() -> void:
+	const TRIANGLE: PackedScene = preload("res://src/triangle.tscn")
+	const SQUARE: PackedScene = preload("res://src/square.tscn")
 	var pos: Vector2 = Vector2(
 		randf_range(_UPLEFT_BOUND.x, _DOWNRIGHT_BOUND.x),
 		randf_range(_UPLEFT_BOUND.y, _DOWNRIGHT_BOUND.y)
 	)
 	var enemy: Node = (
-		Preload.TRIANGLE if time_played < 15.0 || randf() > 0.5 else
-		Preload.SQUARE).instantiate()
+		TRIANGLE if time_played < 15.0 || randf() > 0.5 else
+		SQUARE).instantiate()
 	add_child(enemy, true)
 	move_child(enemy, 5)
 	enemy.add_to_group(ENEMY_GROUP_NAME)

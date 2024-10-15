@@ -24,7 +24,8 @@ func _physics_process(delta: float) -> void:
 
 func _get_hit(area: Area2D) -> void:
 	if area is Bullet:
-		var death_sound: = Preload.ENEMY_DEATH_SOUND.instantiate() as EnemyDeathSound
+		const ENEMY_DEATH_SOUND: PackedScene = preload("res://src/enemy_death_sound.tscn")
+		var death_sound: = ENEMY_DEATH_SOUND.instantiate() as EnemyDeathSound
 		add_sibling(death_sound, true)
 		death_sound.spawn(SQUARE_DIES_SOUND, position)
 		area.queue_free()
