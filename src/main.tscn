@@ -1,14 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://i5wqqb7rnubc"]
+[gd_scene load_steps=16 format=3 uid="uid://i5wqqb7rnubc"]
 
 [ext_resource type="Script" path="res://src/main.gd" id="1_fgkeu"]
-[ext_resource type="Script" path="res://src/player.gd" id="1_ji48a"]
 [ext_resource type="Shape2D" uid="uid://dp4vxi575ml5m" path="res://collision_shapes/horizonal_wall_collision.tres" id="2_mfngk"]
+[ext_resource type="PackedScene" uid="uid://e3kg3ypscypg" path="res://src/player.tscn" id="2_wfqyh"]
 [ext_resource type="Script" path="res://src/wall.gd" id="3_4rowq"]
 [ext_resource type="Shape2D" uid="uid://d3bnq5u8foyj5" path="res://collision_shapes/vertical_wall_collision.tres" id="3_ab31u"]
-[ext_resource type="Texture2D" uid="uid://dj7xms3m0a8fv" path="res://images/Player_Cannon.png" id="3_eji7f"]
-[ext_resource type="Texture2D" uid="uid://dayc3aifsc7ny" path="res://images/Hexagon.png" id="3_ygnfo"]
-[ext_resource type="AudioStream" uid="uid://be06h8r1yh42i" path="res://audio/hexagon_getting_hit.wav" id="5_0o6jl"]
-[ext_resource type="AudioStream" uid="uid://8m01hm2j4cgm" path="res://audio/hexagon_shooting.wav" id="6_8xfvc"]
 [ext_resource type="Script" path="res://src/energy_left_bar.gd" id="6_rgcsu"]
 [ext_resource type="FontFile" uid="uid://ctrrksojqtxhb" path="res://fonts/homevideo.ttf" id="8_5jn85"]
 [ext_resource type="Script" path="res://src/time_label.gd" id="9_iccux"]
@@ -18,11 +14,6 @@
 [ext_resource type="FontFile" uid="uid://cs7o1i14fu151" path="res://fonts/Unitblock-JpJma.ttf" id="13_g5git"]
 [ext_resource type="Script" path="res://src/legal_text.gd" id="14_bupsn"]
 [ext_resource type="AudioStream" uid="uid://tonu3ajmf11c" path="res://audio/button_press.wav" id="15_j64fg"]
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ifwmj"]
-random_pitch = 1.5
-streams_count = 1
-stream_0/stream = ExtResource("6_8xfvc")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_22tb3"]
 random_pitch = 2.0
@@ -34,33 +25,7 @@ process_mode = 1
 script = ExtResource("1_fgkeu")
 metadata/_edit_lock_ = true
 
-[node name="Player" type="CharacterBody2D" parent="."]
-process_mode = 1
-visible = false
-position = Vector2(600, 700)
-rotation = -1.5708
-script = ExtResource("1_ji48a")
-metadata/_edit_lock_ = true
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player"]
-polygon = PackedVector2Array(10, -17, -10, -17, -20, 0, -10, 17, 10, 17, 20, 0)
-metadata/_edit_lock_ = true
-
-[node name="Hexagon" type="Sprite2D" parent="Player"]
-texture = ExtResource("3_ygnfo")
-metadata/_edit_lock_ = true
-
-[node name="PlayerGun" type="Sprite2D" parent="Player"]
-position = Vector2(16, 0)
-scale = Vector2(30, 10)
-texture = ExtResource("3_eji7f")
-metadata/_edit_lock_ = true
-
-[node name="HitSound" type="AudioStreamPlayer2D" parent="Player"]
-stream = ExtResource("5_0o6jl")
-
-[node name="ShootSound" type="AudioStreamPlayer2D" parent="Player"]
-stream = SubResource("AudioStreamRandomizer_ifwmj")
+[node name="Player" parent="." instance=ExtResource("2_wfqyh")]
 
 [node name="UpWall" type="Area2D" parent="."]
 position = Vector2(500, 5)
@@ -285,7 +250,6 @@ process_callback = 0
 [connection signal="bullet_shot" from="Player" to="UI/BulletBar" method="set_size_x"]
 [connection signal="energy_changed" from="Player" to="UI/EnergyBar/EnergyLeftBar" method="set_size_x"]
 [connection signal="no_energy_left" from="Player" to="." method="_end_game"]
-[connection signal="no_energy_left" from="Player" to="Player" method="_stop"]
 [connection signal="no_energy_left" from="Player" to="UI/EnergyUsed" method="_turn_on"]
 [connection signal="no_energy_left" from="Player" to="UI/Title" method="show"]
 [connection signal="no_energy_left" from="Player" to="UI/VBoxContainer" method="show"]
