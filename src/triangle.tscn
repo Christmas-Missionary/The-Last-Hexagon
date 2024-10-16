@@ -1,11 +1,11 @@
 [gd_scene load_steps=4 format=3 uid="uid://dywd0nlh66iqb"]
 
-[ext_resource type="Script" path="res://src/triangle.gd" id="1_dk8q8"]
+[ext_resource type="Script" path="res://src/enemy.gd" id="1_2dyl6"]
 [ext_resource type="AudioStream" uid="uid://bynd164c66n0g" path="res://audio/triangle_dies.wav" id="2_jbcug"]
 [ext_resource type="Texture2D" uid="uid://87uedt46c63i" path="res://images/Triangle.png" id="2_scnd6"]
 
 [node name="Triangle" type="Area2D"]
-script = ExtResource("1_dk8q8")
+script = ExtResource("1_2dyl6")
 death_sound = ExtResource("2_jbcug")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
