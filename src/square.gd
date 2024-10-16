@@ -12,9 +12,10 @@ func _spawn(pos: Vector2) -> void:
 	position = pos
 
 func _physics_process(delta: float) -> void:
-	var direction: Vector2 = (_player.position - global_position).normalized()
-	position += direction * SPEED * delta
-	rotation = position.angle_to_point(_player.position)
+	var direction: Vector2 = _player.position - global_position
+	var angle: float = transform.x.angle_to(direction) - QUART
+	rotate(signf(angle) * minf(delta * 3.0, absf(angle))) 
+	position += Vector2.RIGHT.rotated(rotation + QUART) * SPEED * delta
 	
 	position = position.clamp(Main.UPLEFT_BOUND, Main.DOWNRIGHT_BOUND)
 
@@ -33,4 +34,4 @@ func _hit_player(body: CharacterBody2D) -> void:
 
 
 func _notify_shoot_comp() -> void:
-	_shoot_comp.shoot(transform)
+	_shoot_comp.shoot(position, position.angle_to_point(_shoot_comp.global_position))

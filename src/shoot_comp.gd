@@ -5,8 +5,8 @@ const BULLET: PackedScene = preload("res://src/bullet.tscn")
 
 @onready var _beholder: Node = $/root/Main/BEHolder
 
-func shoot(trans: Transform2D) -> void:
+func shoot(pos: Vector2, rot: float) -> void:
 	var bullet: = BULLET.instantiate() as Bullet
 	_beholder.add_child(bullet, true)
-	bullet.spawn(trans.origin, Vector2.RIGHT.rotated(trans.get_rotation()))
+	bullet.spawn(pos, Vector2.RIGHT.rotated(rot))
 	play()
