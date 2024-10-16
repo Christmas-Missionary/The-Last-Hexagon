@@ -30,10 +30,9 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	# no cheating by going diagonal
-	position += Input.get_vector(&"left", &"right", &"up", &"down") * _SPEED * delta
-	
-	# stays in arena
-	position = position.clamp(Main.UPLEFT_BOUND, Main.DOWNRIGHT_BOUND)
+	position = (
+		position + Input.get_vector(&"left", &"right", &"up", &"down") * _SPEED * delta
+	).clamp(Main.UPLEFT_BOUND, Main.DOWNRIGHT_BOUND) # stays in arena
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouse:
