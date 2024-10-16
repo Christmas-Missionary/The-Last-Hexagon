@@ -1,10 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://i5wqqb7rnubc"]
+[gd_scene load_steps=14 format=3 uid="uid://i5wqqb7rnubc"]
 
 [ext_resource type="Script" path="res://src/main.gd" id="1_fgkeu"]
-[ext_resource type="Shape2D" uid="uid://dp4vxi575ml5m" path="res://collision_shapes/horizonal_wall_collision.tres" id="2_mfngk"]
 [ext_resource type="PackedScene" uid="uid://e3kg3ypscypg" path="res://src/player.tscn" id="2_wfqyh"]
-[ext_resource type="Script" path="res://src/wall.gd" id="3_4rowq"]
-[ext_resource type="Shape2D" uid="uid://d3bnq5u8foyj5" path="res://collision_shapes/vertical_wall_collision.tres" id="3_ab31u"]
 [ext_resource type="Script" path="res://src/beholder.gd" id="6_3pscp"]
 [ext_resource type="Script" path="res://src/energy_left_bar.gd" id="6_rgcsu"]
 [ext_resource type="FontFile" uid="uid://ctrrksojqtxhb" path="res://fonts/homevideo.ttf" id="8_5jn85"]
@@ -26,93 +23,49 @@ process_mode = 1
 script = ExtResource("1_fgkeu")
 metadata/_edit_lock_ = true
 
-[node name="UpWall" type="Area2D" parent="."]
-position = Vector2(500, 5)
-script = ExtResource("3_4rowq")
-metadata/_edit_lock_ = true
-
-[node name="ColorRect" type="ColorRect" parent="UpWall"]
+[node name="Up" type="ColorRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -500.0
-offset_top = -5.0
-offset_right = 700.0
-offset_bottom = 5.0
+offset_right = 1200.0
+offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="UpWall"]
-position = Vector2(100, 0)
-shape = ExtResource("2_mfngk")
-metadata/_edit_lock_ = true
-
-[node name="DownWall" type="Area2D" parent="."]
-position = Vector2(600, 795)
-script = ExtResource("3_4rowq")
-metadata/_edit_lock_ = true
-
-[node name="ColorRect" type="ColorRect" parent="DownWall"]
+[node name="Down" type="ColorRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -600.0
-offset_top = -5.0
-offset_right = 600.0
-offset_bottom = 5.0
+offset_top = 790.0
+offset_right = 1200.0
+offset_bottom = 800.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DownWall"]
-shape = ExtResource("2_mfngk")
-metadata/_edit_lock_ = true
-
-[node name="RightWall" type="Area2D" parent="."]
-position = Vector2(1195, 500)
-script = ExtResource("3_4rowq")
-metadata/_edit_lock_ = true
-
-[node name="ColorRect" type="ColorRect" parent="RightWall"]
+[node name="Right" type="ColorRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -5.0
-offset_top = -500.0
-offset_right = 5.0
-offset_bottom = 300.0
+offset_left = 1190.0
+offset_right = 1200.0
+offset_bottom = 800.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
-position = Vector2(0, -100)
-shape = ExtResource("3_ab31u")
-metadata/_edit_lock_ = true
-
-[node name="LeftWall" type="Area2D" parent="."]
-position = Vector2(5, 400)
-script = ExtResource("3_4rowq")
-metadata/_edit_lock_ = true
-
-[node name="ColorRect" type="ColorRect" parent="LeftWall"]
+[node name="Left" type="ColorRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -5.0
-offset_top = -400.0
-offset_right = 5.0
-offset_bottom = 400.0
+offset_right = 10.0
+offset_bottom = 800.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
-shape = ExtResource("3_ab31u")
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("2_wfqyh")]
@@ -251,10 +204,6 @@ theme_override_font_sizes/font_size = 96
 text = "Close"
 metadata/_edit_lock_ = true
 
-[connection signal="area_entered" from="UpWall" to="UpWall" method="_figure_out_impact"]
-[connection signal="area_entered" from="DownWall" to="DownWall" method="_figure_out_impact"]
-[connection signal="area_entered" from="RightWall" to="RightWall" method="_figure_out_impact"]
-[connection signal="area_entered" from="LeftWall" to="LeftWall" method="_figure_out_impact"]
 [connection signal="bullet_shot" from="Player" to="UI/BulletBar" method="set_size_x"]
 [connection signal="energy_changed" from="Player" to="UI/EnergyBar/EnergyLeftBar" method="set_size_x"]
 [connection signal="no_energy_left" from="Player" to="." method="_end_game"]
