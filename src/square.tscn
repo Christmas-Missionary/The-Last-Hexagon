@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dokqdt2nycdlu"]
+[gd_scene load_steps=9 format=3 uid="uid://dokqdt2nycdlu"]
 
 [ext_resource type="Script" path="res://src/square.gd" id="1_2lpd2"]
 [ext_resource type="PackedScene" uid="uid://dqb4r1mx3n6q1" path="res://src/ShootComp.tscn" id="2_8pyeb"]
 [ext_resource type="Texture2D" uid="uid://cf7ippl6su4wr" path="res://images/Red_Square.png" id="2_d2m82"]
+[ext_resource type="AudioStream" uid="uid://whmfhsd3o767" path="res://audio/square_dies.wav" id="2_v1r7p"]
 [ext_resource type="Texture2D" uid="uid://0th5gx7rxeqx" path="res://images/Square_Cannon.png" id="3_i5a0q"]
 [ext_resource type="AudioStream" uid="uid://rifde4relx7y" path="res://audio/square_shooting.wav" id="4_3mbnb"]
 
@@ -16,6 +17,7 @@ size = Vector2(25, 25)
 
 [node name="Square" type="Area2D"]
 script = ExtResource("1_2lpd2")
+death_sound = ExtResource("2_v1r7p")
 
 [node name="ShootComp" parent="." instance=ExtResource("2_8pyeb")]
 position = Vector2(0, 30)
@@ -38,6 +40,4 @@ process_callback = 0
 wait_time = 2.0
 autostart = true
 
-[connection signal="area_entered" from="." to="." method="_get_hit"]
-[connection signal="body_entered" from="." to="." method="_hit_player"]
 [connection signal="timeout" from="ShootTimer" to="." method="_notify_shoot_comp"]
