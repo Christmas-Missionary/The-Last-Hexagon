@@ -7,9 +7,6 @@ const SPEED: float = 200.0
 
 @onready var _player: = $/root/Main/Player as Node2D
 
-func _spawn(pos: Vector2) -> void:
-	position = pos
-
 func _physics_process(delta: float) -> void:
 	var direction: Vector2 = _player.position - global_position
 	var angle: float = transform.x.angle_to(direction) - QUART
