@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://i5wqqb7rnubc"]
+[gd_scene load_steps=17 format=3 uid="uid://i5wqqb7rnubc"]
 
 [ext_resource type="Script" path="res://src/main.gd" id="1_fgkeu"]
 [ext_resource type="Shape2D" uid="uid://dp4vxi575ml5m" path="res://collision_shapes/horizonal_wall_collision.tres" id="2_mfngk"]
 [ext_resource type="PackedScene" uid="uid://e3kg3ypscypg" path="res://src/player.tscn" id="2_wfqyh"]
 [ext_resource type="Script" path="res://src/wall.gd" id="3_4rowq"]
 [ext_resource type="Shape2D" uid="uid://d3bnq5u8foyj5" path="res://collision_shapes/vertical_wall_collision.tres" id="3_ab31u"]
+[ext_resource type="Script" path="res://src/beholder.gd" id="6_3pscp"]
 [ext_resource type="Script" path="res://src/energy_left_bar.gd" id="6_rgcsu"]
 [ext_resource type="FontFile" uid="uid://ctrrksojqtxhb" path="res://fonts/homevideo.ttf" id="8_5jn85"]
 [ext_resource type="Script" path="res://src/time_label.gd" id="9_iccux"]
@@ -24,8 +25,6 @@ stream_0/stream = ExtResource("15_j64fg")
 process_mode = 1
 script = ExtResource("1_fgkeu")
 metadata/_edit_lock_ = true
-
-[node name="Player" parent="." instance=ExtResource("2_wfqyh")]
 
 [node name="UpWall" type="Area2D" parent="."]
 position = Vector2(500, 5)
@@ -115,6 +114,14 @@ metadata/_edit_lock_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
 shape = ExtResource("3_ab31u")
 metadata/_edit_lock_ = true
+
+[node name="Player" parent="." instance=ExtResource("2_wfqyh")]
+
+[node name="BEHolder" type="Node2D" parent="."]
+script = ExtResource("6_3pscp")
+
+[node name="EnemyTimer" type="Timer" parent="."]
+process_callback = 0
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -244,30 +251,28 @@ theme_override_font_sizes/font_size = 96
 text = "Close"
 metadata/_edit_lock_ = true
 
-[node name="EnemyTimer" type="Timer" parent="."]
-process_callback = 0
-
-[connection signal="bullet_shot" from="Player" to="UI/BulletBar" method="set_size_x"]
-[connection signal="energy_changed" from="Player" to="UI/EnergyBar/EnergyLeftBar" method="set_size_x"]
-[connection signal="no_energy_left" from="Player" to="." method="_end_game"]
-[connection signal="no_energy_left" from="Player" to="UI/EnergyUsed" method="_turn_on"]
-[connection signal="no_energy_left" from="Player" to="UI/Title" method="show"]
-[connection signal="no_energy_left" from="Player" to="UI/VBoxContainer" method="show"]
-[connection signal="no_energy_left" from="Player" to="EnemyTimer" method="stop"]
 [connection signal="area_entered" from="UpWall" to="UpWall" method="_figure_out_impact"]
 [connection signal="area_entered" from="DownWall" to="DownWall" method="_figure_out_impact"]
 [connection signal="area_entered" from="RightWall" to="RightWall" method="_figure_out_impact"]
 [connection signal="area_entered" from="LeftWall" to="LeftWall" method="_figure_out_impact"]
+[connection signal="bullet_shot" from="Player" to="UI/BulletBar" method="set_size_x"]
+[connection signal="energy_changed" from="Player" to="UI/EnergyBar/EnergyLeftBar" method="set_size_x"]
+[connection signal="no_energy_left" from="Player" to="." method="_end_game"]
+[connection signal="no_energy_left" from="Player" to="EnemyTimer" method="stop"]
+[connection signal="no_energy_left" from="Player" to="UI/EnergyUsed" method="_turn_on"]
+[connection signal="no_energy_left" from="Player" to="UI/Title" method="show"]
+[connection signal="no_energy_left" from="Player" to="UI/VBoxContainer" method="show"]
+[connection signal="timeout" from="EnemyTimer" to="BEHolder" method="_spawn_enemy"]
 [connection signal="mouse_entered" from="UI/VBoxContainer/PlayButton" to="UI/VBoxContainer/HoverSound" method="play"]
 [connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="." method="_start_game"]
 [connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="Player" method="_start"]
+[connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="BEHolder" method="_free_all_children"]
+[connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="EnemyTimer" method="start"]
 [connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="UI/EnergyUsed" method="_turn_off"]
 [connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="UI/TimeLabel" method="show"]
 [connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="UI/Title" method="hide"]
 [connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="UI/VBoxContainer" method="hide"]
-[connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="EnemyTimer" method="start"]
 [connection signal="mouse_entered" from="UI/VBoxContainer/LegalButton" to="UI/VBoxContainer/HoverSound" method="play"]
 [connection signal="pressed" from="UI/VBoxContainer/LegalButton" to="UI/VBoxContainer/LegalButton" method="_show"]
 [connection signal="mouse_entered" from="UI/VBoxContainer/LegalButton/CloseButton" to="UI/VBoxContainer/HoverSound" method="play"]
 [connection signal="pressed" from="UI/VBoxContainer/LegalButton/CloseButton" to="UI/VBoxContainer/LegalButton" method="_close"]
-[connection signal="timeout" from="EnemyTimer" to="." method="_spawn_enemy"]
