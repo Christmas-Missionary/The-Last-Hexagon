@@ -44,7 +44,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"shoot") and num_of_bullets > 0:
 		energy -= 0.75
 		num_of_bullets -= 1
-		_shoot_comp.shoot(transform)
+		_shoot_comp.shoot(position, rotation)
 
 func _start() -> void:
 	_coll.set_deferred(&"disabled", false)
