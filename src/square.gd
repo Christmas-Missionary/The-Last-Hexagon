@@ -5,10 +5,6 @@ const SQUARE_DIES_SOUND: AudioStreamWAV = preload("res://audio/square_dies.wav")
 const QUART: float = TAU / 4
 const SPEED: float = 200.0
 
-# borrowed from player constants
-const _UPLEFT_BOUND: Vector2 = Vector2.ONE * 30.0
-const _DOWNRIGHT_BOUND: Vector2 = Vector2(1200, 800) - _UPLEFT_BOUND
-
 @onready var _player: = $/root/Main/Player as Node2D
 @onready var _shoot_comp: = $ShootComp as ShootComp
 
@@ -20,7 +16,7 @@ func _physics_process(delta: float) -> void:
 	position += direction * SPEED * delta
 	rotation = position.angle_to_point(_player.position)
 	
-	position = position.clamp(_UPLEFT_BOUND, _DOWNRIGHT_BOUND)
+	position = position.clamp(Main.UPLEFT_BOUND, Main.DOWNRIGHT_BOUND)
 
 func _get_hit(area: Area2D) -> void:
 	if area is Bullet:
