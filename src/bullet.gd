@@ -11,10 +11,8 @@ var velocity: Vector2 = Vector2()
 
 # Player calls this
 func spawn(pos: Vector2, dir: Vector2) -> void:
-	body_entered.connect(_hit_body)
 	velocity = dir * SPEED
-	pos += (velocity / 20)
-	position = pos.clamp(Main.UPLEFT_BOUND, Main.DOWNRIGHT_BOUND)
+	position = (pos + (velocity / 20)).clamp(Main.UPLEFT_BOUND, Main.DOWNRIGHT_BOUND)
 
 func _physics_process(delta: float) -> void:
 	position += velocity * delta

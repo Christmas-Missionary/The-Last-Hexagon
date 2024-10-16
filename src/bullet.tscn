@@ -26,3 +26,5 @@ texture = ExtResource("2_lipo8")
 
 [node name="BounceSound" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_1l6mf")
+
+[connection signal="body_entered" from="." to="." method="_hit_body"]
