@@ -2,12 +2,6 @@ extends CharacterBody2D
 class_name Player
 
 const _SPEED: float = 300.0
-
-# ! WARNING DO NOT CHANGE THESE! WARNING !
-# 30.0 is wall offset, (1200, 800) is length of arena.
-const _UPLEFT_BOUND: Vector2 = Vector2.ONE * 30.0
-const _DOWNRIGHT_BOUND: Vector2 = Vector2(1200, 800) - _UPLEFT_BOUND
-
 const _STARTING_ENERGY: float = 1200.0
 const _STARTING_BULLETS: int = 240
 
@@ -39,7 +33,7 @@ func _physics_process(delta: float) -> void:
 	position += Input.get_vector(&"left", &"right", &"up", &"down") * _SPEED * delta
 	
 	# stays in arena
-	position = position.clamp(_UPLEFT_BOUND, _DOWNRIGHT_BOUND)
+	position = position.clamp(Main.UPLEFT_BOUND, Main.DOWNRIGHT_BOUND)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouse:
