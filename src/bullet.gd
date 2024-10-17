@@ -23,7 +23,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y = -velocity.y
 	if BULLET_UPLEFT.x >= position.x or BULLET_DOWNRIGHT.x <= position.x:
 		velocity.x = -velocity.x
-	if last_vel != velocity and Main.is_playing:
+	if last_vel != velocity and TimePlayed.is_playing:
 		_bounce_sound.play()
 
 func _hit_body(body: Node2D) -> void:

@@ -8,7 +8,7 @@ func _spawn_enemy() -> void:
 		randf_range(Main.UPLEFT_BOUND.y, Main.DOWNRIGHT_BOUND.y)
 	)
 	var enemy: = (
-		TRIANGLE if Main.time_played < 15.0 || randf() > 0.5 else
+		TRIANGLE if TimePlayed.time_played < 15.0 || randf() > 0.5 else
 		SQUARE).instantiate() as Node2D
 	add_child(enemy, true)
 	enemy.position = pos
