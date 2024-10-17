@@ -24,6 +24,7 @@ signal bullet_shot(new_val: int)
 @onready var _coll: = $CollisionPolygon2D as CollisionPolygon2D
 @onready var _hit_sound: = $HitSound as AudioStreamPlayer2D
 @onready var _shoot_comp: = $ShootComp as ShootComp
+@onready var _tree: SceneTree = get_tree()
 
 func _ready() -> void:
 	_stop()
@@ -46,19 +47,21 @@ func _input(event: InputEvent) -> void:
 		_shoot_comp.shoot(position, rotation)
 
 func _start() -> void:
-	_coll.set_deferred(&"disabled", false)
 	position = Vector2(600, 700)
 	energy = _STARTING_ENERGY
 	num_of_bullets = _STARTING_BULLETS
 	set_physics_process(true)
 	set_process_input(true)
 	show()
+	await _tree.process_frame
+	_coll.set_disabled(false)
 
 func _stop() -> void:
-	_coll.set_deferred(&"disabled", true)
 	set_physics_process(false)
 	set_process_input(false)
 	hide()
+	await _tree.process_frame
+	_coll.set_disabled(true)
 
 # Called by bullet, triangle, and square
 func get_hit() -> void:
