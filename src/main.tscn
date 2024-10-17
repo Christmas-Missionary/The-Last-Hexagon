@@ -135,25 +135,22 @@ offset_bottom = 489.0
 color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
-[node name="LegalText" type="RichTextLabel" parent="UI/VBoxContainer/LegalButton"]
-visible = false
+[node name="LegalText" type="RichTextLabel" parent="UI/VBoxContainer/LegalButton/LegalRect"]
 layout_mode = 0
-offset_left = -579.0
-offset_top = -289.0
-offset_right = 597.0
-offset_bottom = 489.0
+offset_left = 2.0
+offset_right = 1178.0
+offset_bottom = 778.0
 theme_override_fonts/normal_font = ExtResource("13_g5git")
 theme_override_font_sizes/normal_font_size = 36
 text = "Test"
 script = ExtResource("14_bupsn")
 
-[node name="CloseButton" type="Button" parent="UI/VBoxContainer/LegalButton"]
-visible = false
+[node name="CloseButton" type="Button" parent="UI/VBoxContainer/LegalButton/LegalRect"]
 layout_mode = 0
-offset_left = -173.0
-offset_top = 553.0
-offset_right = 123.0
-offset_bottom = 648.0
+offset_left = 408.0
+offset_top = 842.0
+offset_right = 704.0
+offset_bottom = 937.0
 theme_override_fonts/font = ExtResource("8_5jn85")
 theme_override_font_sizes/font_size = 96
 text = "Close"
@@ -178,5 +175,5 @@ metadata/_edit_lock_ = true
 [connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="UI/VBoxContainer" method="hide"]
 [connection signal="mouse_entered" from="UI/VBoxContainer/LegalButton" to="UI/VBoxContainer/HoverSound" method="play"]
 [connection signal="pressed" from="UI/VBoxContainer/LegalButton" to="UI/VBoxContainer/LegalButton" method="_show"]
-[connection signal="mouse_entered" from="UI/VBoxContainer/LegalButton/CloseButton" to="UI/VBoxContainer/HoverSound" method="play"]
-[connection signal="pressed" from="UI/VBoxContainer/LegalButton/CloseButton" to="UI/VBoxContainer/LegalButton" method="_close"]
+[connection signal="mouse_entered" from="UI/VBoxContainer/LegalButton/LegalRect/CloseButton" to="UI/VBoxContainer/HoverSound" method="play"]
+[connection signal="pressed" from="UI/VBoxContainer/LegalButton/LegalRect/CloseButton" to="UI/VBoxContainer/LegalButton" method="_close"]
