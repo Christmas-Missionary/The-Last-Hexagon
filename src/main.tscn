@@ -116,7 +116,7 @@ offset_right = 644.0
 offset_bottom = 932.0
 theme_override_fonts/normal_font = ExtResource("8_5jn85")
 theme_override_font_sizes/normal_font_size = 96
-text = "HHH:MM:SS.T"
+text = ".0"
 script = ExtResource("9_iccux")
 
 [node name="BulletBar" type="ColorRect" parent="UI"]
