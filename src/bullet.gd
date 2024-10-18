@@ -9,7 +9,7 @@ var velocity: Vector2 = Vector2()
 
 @onready var _bounce_sound: = $BounceSound as AudioStreamPlayer2D
 
-# Player calls this
+## Player and square call this
 func spawn(pos: Vector2, dir: Vector2) -> void:
 	velocity = dir * SPEED
 	position = (pos + (velocity / 20)).clamp(Main.UPLEFT_BOUND, Main.DOWNRIGHT_BOUND)

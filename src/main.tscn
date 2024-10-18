@@ -154,8 +154,8 @@ theme_override_font_sizes/font_size = 96
 text = "Close"
 metadata/_edit_lock_ = true
 
-[connection signal="bullet_shot" from="Player" to="UI/BulletBar" method="set_size_x"]
-[connection signal="energy_changed" from="Player" to="UI/EnergyBar/EnergyLeftBar" method="set_size_x"]
+[connection signal="bullet_shot" from="Player" to="UI/BulletBar" method="_set_size_x"]
+[connection signal="energy_changed" from="Player" to="UI/EnergyBar/EnergyLeftBar" method="_set_size_x"]
 [connection signal="no_energy_left" from="Player" to="EnemyTimer" method="stop"]
 [connection signal="no_energy_left" from="Player" to="UI/EnergyUsed" method="_turn_on"]
 [connection signal="no_energy_left" from="Player" to="UI/TimePlayed" method="_stop_time"]
