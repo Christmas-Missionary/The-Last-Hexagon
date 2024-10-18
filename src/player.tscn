@@ -39,5 +39,3 @@ metadata/_edit_lock_ = true
 
 [node name="HitSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_j2yfm")
-
-[connection signal="no_energy_left" from="." to="." method="_stop"]
