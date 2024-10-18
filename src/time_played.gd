@@ -11,6 +11,7 @@ func _physics_process(delta: float) -> void:
 		text = tenths_of_seconds.insert(tenths_of_seconds.length() - 1, '.')
 
 func _start_time() -> void:
+	show()
 	is_playing = true
 	time_played = 0.0
 
