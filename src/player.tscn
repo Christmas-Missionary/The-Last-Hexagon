@@ -23,7 +23,7 @@ metadata/_edit_lock_ = true
 [node name="ShootComp" parent="." instance=ExtResource("2_omlpo")]
 stream = SubResource("AudioStreamRandomizer_ifwmj")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="Collision" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(10, -17, -10, -17, -20, 0, -10, 17, 10, 17, 20, 0)
 metadata/_edit_lock_ = true
 
