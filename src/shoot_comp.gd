@@ -1,13 +1,13 @@
 extends AudioStreamPlayer2D
 class_name ShootComp
 
-const BULLET: PackedScene = preload("res://src/bullet.tscn")
+const _BULLET: PackedScene = preload("res://src/bullet.tscn")
 
 @onready var _beholder: Node = $/root/Main/BEHolder
 
 ## Called by Player and Square
 func shoot(pos: Vector2, rot: float) -> void:
-	var bullet: = BULLET.instantiate() as Bullet
+	var bullet: = _BULLET.instantiate() as Bullet
 	_beholder.add_child(bullet, true)
 	bullet.spawn(pos, Vector2.RIGHT.rotated(rot))
 	play()

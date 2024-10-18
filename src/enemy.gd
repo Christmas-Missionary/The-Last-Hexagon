@@ -2,8 +2,8 @@
 extends Area2D
 class_name Enemy
 
-const QUART: float = TAU / 4
-const SPEED: float = 200.0
+const _QUART: float = TAU / 4
+const _SPEED: float = 200.0
 
 @export var death_sound: AudioStream
 
@@ -15,9 +15,9 @@ func _init() -> void:
 
 func _physics_process(delta: float) -> void:
 	var direction: Vector2 = _player.position - global_position
-	var angle: float = transform.x.angle_to(direction) - QUART
+	var angle: float = transform.x.angle_to(direction) - _QUART
 	rotate(signf(angle) * minf(delta * 3.0, absf(angle))) 
-	position += Vector2.RIGHT.rotated(rotation + QUART) * SPEED * delta
+	position += Vector2.RIGHT.rotated(rotation + _QUART) * _SPEED * delta
 	
 	position = position.clamp(Main.UPLEFT_BOUND, Main.DOWNRIGHT_BOUND)
 
