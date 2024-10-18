@@ -16,6 +16,7 @@ var num_of_bullets: int = _STARTING_BULLETS:
 	set(val):
 		num_of_bullets = val
 		bullet_shot.emit(val)
+		_stop()
 
 signal energy_changed(new_val: int)
 signal no_energy_left
