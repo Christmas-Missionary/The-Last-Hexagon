@@ -9,9 +9,9 @@ func _spawn_enemy() -> void:
 	)
 	var enemy: = (
 		TRIANGLE if TimePlayed.time_played < 15.0 || randf() > 0.5 else
-		SQUARE).instantiate() as Node2D
+		SQUARE).instantiate() as Enemy
 	add_child(enemy, true)
-	enemy.position = pos
+	enemy.spawn(pos)
 
 func _free_all_children() -> void:
 	for child: Node in get_children():
