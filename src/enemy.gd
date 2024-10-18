@@ -9,9 +9,21 @@ const _SPEED: float = 200.0
 
 @onready var _player: = $/root/Main/Player as Node2D
 
-func _init() -> void:
+static func length_to_hundred(pos: Vector2, origin: Vector2) -> Vector2:
+	var relative_pos: Vector2 = pos - origin # if the origin were (0, 0)
+	var normal_pos: Vector2 = relative_pos.normalized()
+	var hundred_pos: Vector2 = normal_pos * 100
+	return hundred_pos + origin
+
+## Called by beholder
+func spawn(pos: Vector2) -> void:
 	area_entered.connect(_get_hit)
 	body_entered.connect(_hit_player)
+	
+	var pos_diff: Vector2 = pos - _player.position
+	if pos_diff.length_squared() <= 10000:
+		pos = length_to_hundred(pos, _player.position)
+	position = pos.clamp(Main.UPLEFT_BOUND, Main.DOWNRIGHT_BOUND)
 
 func _physics_process(delta: float) -> void:
 	var direction: Vector2 = _player.position - global_position
