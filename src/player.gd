@@ -59,7 +59,7 @@ func _start() -> void:
 	set_process_input(true)
 	show()
 	await _tree.process_frame
-	_coll.set_disabled(false)
+	_coll.set_disabled(false) # I don't like magic strings
 
 func _stop() -> void:
 	set_physics_process(false)

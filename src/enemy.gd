@@ -1,4 +1,5 @@
 ## @experimental: The moment an "Enemy" doesn't use all features of this class, the thing it doesn't want must be abstracted as a seperate component.
+## Triangle uses this script, as it has nothing to add on.
 extends Area2D
 class_name Enemy
 
@@ -11,9 +12,11 @@ const _SPEED: float = 200.0
 
 ## Called by beholder
 func spawn(pos: Vector2) -> void:
+	# Signals to connect
 	area_entered.connect(_get_hit)
 	body_entered.connect(_hit_player)
 	
+	# if pos is less than 100 pixels from player, be 100 pixels away if possible
 	if (pos - _player.position).length_squared() <= 10000:
 		pos = ((pos - _player.position)
 			   .normalized()
