@@ -5,6 +5,10 @@ const _SPEED: float = 300.0
 const _STARTING_ENERGY: float = 1200.0
 const _STARTING_BULLETS: int = 240
 
+const MOUSE_COST: float = 1 / 64.0
+const KEY_COST: float = 1 / 8.0
+const SHOOT_COST: float = 3 / 4.0
+
 var energy: float = _STARTING_ENERGY:
 	set(val):
 		energy = val
@@ -38,12 +42,12 @@ func _physics_process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouse:
-		energy -= 0.015625
+		energy -= MOUSE_COST
 		rotation = position.angle_to_point(get_global_mouse_position())
 	if event is InputEventKey:
-		energy -= 0.125
+		energy -= KEY_COST
 	if event.is_action_pressed(&"shoot") and num_of_bullets > 0:
-		energy -= 0.75
+		energy -= SHOOT_COST
 		num_of_bullets -= 1
 		_shoot_comp.shoot(position, rotation)
 
