@@ -96,7 +96,7 @@ bbcode_enabled = true
 text = "[center][color=#00b0ff]The Last Hexagon"
 metadata/_edit_lock_ = true
 
-[node name="VBoxContainer" type="HBoxContainer" parent="UI"]
+[node name="ControlPanel" type="HBoxContainer" parent="UI"]
 layout_mode = 0
 offset_left = 190.0
 offset_top = 300.0
@@ -104,10 +104,10 @@ offset_right = 990.0
 offset_bottom = 550.0
 metadata/_edit_lock_ = true
 
-[node name="HoverSound" type="AudioStreamPlayer" parent="UI/VBoxContainer"]
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/ControlPanel"]
 stream = SubResource("AudioStreamRandomizer_22tb3")
 
-[node name="PlayButton" type="Button" parent="UI/VBoxContainer"]
+[node name="PlayButton" type="Button" parent="UI/ControlPanel"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("8_5jn85")
@@ -115,7 +115,7 @@ theme_override_font_sizes/font_size = 96
 text = "Play"
 metadata/_edit_lock_ = true
 
-[node name="LegalButton" type="Button" parent="UI/VBoxContainer"]
+[node name="LegalButton" type="Button" parent="UI/ControlPanel"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("8_5jn85")
@@ -123,7 +123,7 @@ theme_override_font_sizes/font_size = 96
 text = "Legal"
 metadata/_edit_lock_ = true
 
-[node name="LegalRect" type="ColorRect" parent="UI/VBoxContainer/LegalButton"]
+[node name="LegalRect" type="ColorRect" parent="UI/ControlPanel/LegalButton"]
 visible = false
 layout_mode = 0
 offset_left = -581.0
@@ -133,7 +133,7 @@ offset_bottom = 489.0
 color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
-[node name="LegalText" type="RichTextLabel" parent="UI/VBoxContainer/LegalButton/LegalRect"]
+[node name="LegalText" type="RichTextLabel" parent="UI/ControlPanel/LegalButton/LegalRect"]
 layout_mode = 0
 offset_left = 2.0
 offset_right = 1178.0
@@ -143,7 +143,7 @@ theme_override_font_sizes/normal_font_size = 36
 text = "Test"
 script = ExtResource("14_bupsn")
 
-[node name="CloseButton" type="Button" parent="UI/VBoxContainer/LegalButton/LegalRect"]
+[node name="CloseButton" type="Button" parent="UI/ControlPanel/LegalButton/LegalRect"]
 layout_mode = 0
 offset_left = 408.0
 offset_top = 842.0
@@ -160,17 +160,17 @@ metadata/_edit_lock_ = true
 [connection signal="no_energy_left" from="Player" to="UI/EnergyUsed" method="_turn_on"]
 [connection signal="no_energy_left" from="Player" to="UI/TimePlayed" method="_stop_time"]
 [connection signal="no_energy_left" from="Player" to="UI/Title" method="show"]
-[connection signal="no_energy_left" from="Player" to="UI/VBoxContainer" method="show"]
+[connection signal="no_energy_left" from="Player" to="UI/ControlPanel" method="show"]
 [connection signal="timeout" from="EnemyTimer" to="BEHolder" method="_spawn_enemy"]
-[connection signal="mouse_entered" from="UI/VBoxContainer/PlayButton" to="UI/VBoxContainer/HoverSound" method="play"]
-[connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="Player" method="_start"]
-[connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="BEHolder" method="_free_all_children"]
-[connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="EnemyTimer" method="start"]
-[connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="UI/EnergyUsed" method="_turn_off"]
-[connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="UI/TimePlayed" method="_start_time"]
-[connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="UI/Title" method="hide"]
-[connection signal="pressed" from="UI/VBoxContainer/PlayButton" to="UI/VBoxContainer" method="hide"]
-[connection signal="mouse_entered" from="UI/VBoxContainer/LegalButton" to="UI/VBoxContainer/HoverSound" method="play"]
-[connection signal="pressed" from="UI/VBoxContainer/LegalButton" to="UI/VBoxContainer/LegalButton/LegalRect" method="show"]
-[connection signal="mouse_entered" from="UI/VBoxContainer/LegalButton/LegalRect/CloseButton" to="UI/VBoxContainer/HoverSound" method="play"]
-[connection signal="pressed" from="UI/VBoxContainer/LegalButton/LegalRect/CloseButton" to="UI/VBoxContainer/LegalButton/LegalRect" method="hide"]
+[connection signal="mouse_entered" from="UI/ControlPanel/PlayButton" to="UI/ControlPanel/HoverSound" method="play"]
+[connection signal="pressed" from="UI/ControlPanel/PlayButton" to="Player" method="_start"]
+[connection signal="pressed" from="UI/ControlPanel/PlayButton" to="BEHolder" method="_free_all_children"]
+[connection signal="pressed" from="UI/ControlPanel/PlayButton" to="EnemyTimer" method="start"]
+[connection signal="pressed" from="UI/ControlPanel/PlayButton" to="UI/EnergyUsed" method="_turn_off"]
+[connection signal="pressed" from="UI/ControlPanel/PlayButton" to="UI/TimePlayed" method="_start_time"]
+[connection signal="pressed" from="UI/ControlPanel/PlayButton" to="UI/Title" method="hide"]
+[connection signal="pressed" from="UI/ControlPanel/PlayButton" to="UI/ControlPanel" method="hide"]
+[connection signal="mouse_entered" from="UI/ControlPanel/LegalButton" to="UI/ControlPanel/HoverSound" method="play"]
+[connection signal="pressed" from="UI/ControlPanel/LegalButton" to="UI/ControlPanel/LegalButton/LegalRect" method="show"]
+[connection signal="mouse_entered" from="UI/ControlPanel/LegalButton/LegalRect/CloseButton" to="UI/ControlPanel/HoverSound" method="play"]
+[connection signal="pressed" from="UI/ControlPanel/LegalButton/LegalRect/CloseButton" to="UI/ControlPanel/LegalButton/LegalRect" method="hide"]
