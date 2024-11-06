@@ -1,4 +1,4 @@
-## @experimental: The moment an "Enemy" doesn't use all features of this class, the thing it doesn't want must be abstracted as a seperate component.
+## @experimental: The moment an "Enemy" doesn't use all features of this class, the thing it doesn't want must be abstracted as a different component.
 ## Triangle uses this script, as it has nothing to add on.
 extends Area2D
 class_name Enemy
