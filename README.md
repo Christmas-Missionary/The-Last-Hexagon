@@ -5,7 +5,7 @@ As of right now, I have no interest in putting this on itch.io.
 
 The Jam Edition can be found [here](https://christmas-missionary.itch.io/the-last-hexagon-jam-edition), with it's repo [here](https://github.com/Christmas-Missionary/MJ169).  
   
-The Unlicense applies to all source code.  
+The 0BSD license applies to all source code.  
 Sound Effects are by me, under CC0-1.0.  
 Fonts are by GGBotNet, under CC0-1.0.
 
